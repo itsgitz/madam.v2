@@ -1,0 +1,30 @@
+version: '3.5'
+services: 
+    madam-db:
+        image: mariadb:latest
+        container_name: app-madam-db
+        environment: 
+            - MYSQL_ROOT_PASSWORD=P4ssword
+            - MYSQL_DATABASE=madam
+            - MYSQL_USER=madam
+            - MYSQL_PASSWORD=P4ssword
+        restart: on-failure
+        ports: 
+            - '3306:3306'
+        networks: 
+            - madam
+    madam:
+        image: php:7.4-apache
+        container_name: app-madam
+        restart: unless-stopped
+        volumes: 
+            - ./:/var/www/html
+        ports: 
+            - '8080:80'
+        networks: 
+            - madam
+
+networks: 
+    madam:
+        name: madam
+        driver: bridge
