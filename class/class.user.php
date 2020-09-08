@@ -1,6 +1,6 @@
 <?php
 
-namespace Madam\User;
+namespace Madam;
 
 class User
 {
