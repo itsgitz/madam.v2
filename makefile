@@ -1,2 +1,2 @@
 run:
-	docker-compose up --build --force-recreate
+	docker-compose up --build --force-recreate -d
