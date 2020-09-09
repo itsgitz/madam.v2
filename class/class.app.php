@@ -17,6 +17,8 @@ class App
     public function run()
     {
         $this->init();
+
+        echo "WEB APP INITIALIZATION!";
     }
 
     private function init()
