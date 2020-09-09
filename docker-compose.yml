@@ -1,31 +1,33 @@
 version: '3.5'
 services: 
-    madam-db:
+    madam.v2-db:
         image: mariadb:latest
-        container_name: app-madam-db
+        container_name: app-madam.v2-db
         environment: 
-            - MYSQL_ROOT_PASSWORD=P4ssword
-            - MYSQL_DATABASE=madam
-            - MYSQL_USER=madam
-            - MYSQL_PASSWORD=P4ssword
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=${DB_NAME}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
         restart: on-failure
         ports: 
             - '3306:3306'
+        volumes: 
+            - ./docker:/var/lib/mysql
         networks: 
-            - madam
-    madam:
+            - madam.v2
+    madam.v2:
         depends_on:
-            - madam-db
-        image: php:7.4-apache
-        container_name: app-madam
+            - madam.v2-db
+        build: .
+        container_name: app-madam.v2
         restart: unless-stopped
         volumes: 
             - ./:/var/www/html
         ports: 
             - '8080:80'
         networks: 
-            - madam
+            - madam.v2
 networks: 
-    madam:
-        name: madam
+    madam.v2:
+        name: madam.v2
         driver: bridge
