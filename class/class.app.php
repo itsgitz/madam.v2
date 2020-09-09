@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Author: anggit.ginanjar@outlook.com <itsgitz.com>
+ */
+
 namespace Madam;
 
 
@@ -8,6 +12,8 @@ use Symfony\Component\Dotenv\Dotenv;
 
 class App
 {
+    const ENV = './.env';
+
     public function run()
     {
         $this->init();
@@ -16,12 +22,14 @@ class App
     private function init()
     {
         $this->loadEnv();
+
         $db = new Database();
+        $db->init();
     }
 
-    private function loadEnv()
+    public function loadEnv()
     {
         $dotenv = new Dotenv();
-        $dotenv->load('./.env');
+        $dotenv->load(self::ENV);
     }
 }
