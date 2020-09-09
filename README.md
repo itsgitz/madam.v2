@@ -1,22 +1,29 @@
 # Madam Version 2
 
 ## A. Prerequistes
-If you run this application using docker container, it will run as `docker-compose` services. If run using web server such as `apache`, `nginx`, or application bundle such as `WAMPP` or `XAMPP` place this PHP application in the `Document Root`.
+#### 1. Docker
+* Docker
+* Docker Compose
 
-## B. Usage
+#### 2. Web Server 
+* WAMPP or XAMPP
 
-1. Docker
+## C. Usage and Installation
 
-Just run the `make run` command on your Linux terminal. If your operating system is Windows, I suggest to using Git Bash terminal or Windows Subsystem Linux. Access your application using Web Browser to `http://127.0.0.1:8080`
+#### 1. Docker
 
-2. Web Server
+* Just run the `make run` command on your Linux terminal. If your operating system is Windows, I suggest you to using Git Bash terminal or Windows Subsystem Linux
+* Access your application using Web Browser to http://127.0.0.1:8080
 
-* Place the application in the `Document Root` of web server (for example: `/var/www/html` or `htdocs` in Windows)
+#### 2. Web Server
+
+* Place the application in the `Document Root` of web server (for example: `/var/www/html` in Linux or `htdocs` in Windows)
 * Run PHP database migration:
 ```shell
-php -q migration.php
+php -q database/madamv2.migration.php
 ```
+* Access on Web Browser http://127.0.0.1 (default port is 80)
 
-# Contributor
+### D. Contributor
 
 Anggit M Ginanjar (anggit.ginanjar.dev@gmail.com)
