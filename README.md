@@ -1,6 +1,6 @@
 # Madam Version 2
 
-## A. Prerequistes
+## A. Prerequisites
 #### 1. Docker
 * Docker
 * Docker Compose
