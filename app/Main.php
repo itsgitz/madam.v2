@@ -28,6 +28,9 @@ class App
 
         // router initialization
         $this->router();
+
+        // views initialization
+        $this->views();
     }
 
     public function loadEnv()
@@ -46,5 +49,11 @@ class App
     {
         $router = new Router();
         $router->init();
+    }
+
+    private function views()
+    {
+        $views = new Views();
+        $views->run();
     }
 }
