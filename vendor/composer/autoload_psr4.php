@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'eftec\\bladeone\\' => array($vendorDir . '/eftec/bladeone/lib'),
     'Symfony\\Component\\Dotenv\\' => array($vendorDir . '/symfony/dotenv'),
-    'Madam\\' => array($baseDir . '/class'),
+    'Madam\\' => array($baseDir . '/class', $baseDir . '/app', $baseDir . '/controllers', $baseDir . '/router'),
+    'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),
 );
