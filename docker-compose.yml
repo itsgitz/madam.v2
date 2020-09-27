@@ -19,7 +19,6 @@ services:
         depends_on:
             - madam.v2-db
         build: .
-        container_name: app-madam.v2
         restart: unless-stopped
         volumes: 
             - ./:/var/www/html
@@ -27,6 +26,14 @@ services:
             - '8080:80'
         networks: 
             - madam.v2
+        environment: 
+            - DB_SERVER=${DB_SERVER}
+            - DB_USERNAME=${DB_USERNAME}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_NAME=${DB_NAME}
+            - CUSTOMER_TABLE=${CUSTOMER_TABLE}
+            - USER_TABLE=${USER_TABLE}
+            - CID_TABLE=${CID_TABLE}
 networks: 
     madam.v2:
         name: madam.v2
