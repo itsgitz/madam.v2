@@ -87,6 +87,7 @@ class Database
             id INT(6) AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(64) NOT NULL,
             username VARCHAR(32) NOT NULL,
+            password VARCHAR(256) NOT NULL,
             email VARCHAR(128) NOT NULL,
             activated VARCHAR(16) NOT NULL,
             user_role VARCHAR(64) NOT NULL,
@@ -120,8 +121,11 @@ class Database
     {
         $customerSeeder = "INSERT INTO {$_ENV['CUSTOMER_TABLE']} (customer_name, sales_name, segmentation)
             VALUES ('Bank QNB Indonesia', 'Sivi Paramudhita', 'Finance')";
-        $userSeeder = "INSERT INTO {$_ENV['USER_TABLE']} (name, username, email, activated, user_role)
-            VALUES ('Gatta Pherasi Aditama', 'GTT', 'gatta.aditama@lintasarta.co.id', 'Yes', 'Administrator')";
+
+        $hashedPassword = password_hash($_ENV['DB_PASSWORD'], PASSWORD_DEFAULT, ['cost' => 15]);
+
+        $userSeeder = "INSERT INTO {$_ENV['USER_TABLE']} (name, username, password, email, activated, user_role)
+            VALUES ('Gatta Pherasi Aditama', 'GTT', '{$hashedPassword}', 'gatta.aditama@lintasarta.co.id', 'Yes', 'Administrator')";
 
         $cidSeeder = "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location)
             VALUES ('2012006972', 'DRC', 'Bank QNB Indonesia', 'TBS Lt. 1', 'Cage A')";
