@@ -20,8 +20,18 @@ class Views
         $this->blade = new BladeOne(self::VIEW, self::CACHE, BladeOne::MODE_DEBUG);
     }
 
-    public function run()
+    public function run($class, $data = [])
     {
-        echo $this->blade->run('home', ['var' => 'val']);
+        $name = $this->setViewName($class);
+        
+        echo $this->blade->run($name, $data);
+    }
+
+    private function setViewName($class)
+    {
+        $spl = explode('\\', $class);
+        $lower = strtolower($spl[1]);
+
+        return $lower;
     }
 }
