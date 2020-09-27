@@ -18,10 +18,6 @@
 #### 2. Web Server
 
 * Place the application in the `Document Root` of web server (for example: `/var/www/html` in Linux or `htdocs` in Windows)
-* Run PHP database migration:
-```shell
-php -q database/madamv2.migration.php
-```
 * Access on Web Browser http://127.0.0.1 (default port is 80)
 
 ### D. Contributor
