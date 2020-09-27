@@ -114,6 +114,12 @@ class Router
                     die();
                 }
             });
+        } else {
+            $r->respond(function ($request, $response) {
+                if ($request->uri() == '/login') {
+                    $response->redirect('/')->send();
+                }
+            });
         }
     }
 }
