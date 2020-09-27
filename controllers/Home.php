@@ -9,19 +9,20 @@ namespace Madam;
 
 class Home extends Base
 {
-    private $title;
+    private $bind = [];
 
     function __construct()
     {
-        $this->title = 'Home Page';
+        $this->bind['title'] = 'Home Page';
     }
 
     public function index()
     {
-        $bind = [
-            'title' => $this->title,
-        ];
+        $sessions = new Sessions();
+        $s = $sessions->getSessions();
+        
+        var_dump($s);
 
-        $this->setView(__CLASS__, $bind);
+        $this->setView(__CLASS__, $this->bind);
     }
 }
