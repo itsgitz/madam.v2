@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home</title>
+        <title>{{$title}}</title>
+        <link rel="stylesheet" href="/assets/css/w3.css">
     </head>
     <body>
-        <h1>{{$var}}</h1>
+        <h1>{{$title}}</h1>
     </body>
 </html>
