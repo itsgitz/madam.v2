@@ -23,11 +23,17 @@ class Router
         // initialize klein router library
         $r = new Klein();
 
+        // start session
+        $r->service()->startSession();
+
         // define list of route or endpoint
         $this->routes($r);
 
         // run http error handler
         $this->errorHandler($r);
+
+        // auth middleware
+        $this->auth($r);
 
         // run the router
         $r->dispatch();
@@ -47,14 +53,34 @@ class Router
     {
         $this->controllers = $this->setController();
 
-        $r->respond('GET', '/', $this->setCallbackController($this->controllers['Home']));
-        $r->respond('GET', '/login', $this->setCallbackController($this->controllers['Login']));
-        $r->respond('GET', '/users', $this->setCallbackController($this->controllers['Users']));
+        $r->respond('GET', '/', $this->setCallbackController($this->controllers['Home'], Http::METHOD_GET));
+        $r->respond('GET', '/login', $this->setCallbackController($this->controllers['Login'], Http::METHOD_GET));
+        $r->respond('POST', '/login', $this->setCallbackController($this->controllers['Login'], Http::METHOD_POST));
+        // $r->respond('GET', '/users', $this->setCallbackController($this->controllers['Users'], Http::METHOD_GET));
     }
 
-    private function setCallbackController($obj = null)
+    private function setCallbackController($obj = null, $method)
     {
-        return [$obj, 'index'];
+        switch ($method) {
+            case 'GET':
+                return [$obj, 'index'];
+                break;
+
+            case 'POST':
+                return [$obj, 'post'];
+                break;
+
+            case 'PUT':
+                return [$obj, 'put'];
+                break;
+
+            case 'DELETE':
+                return [$obj, 'delete'];
+                break;
+
+            default:
+                break;
+        }
     }
 
     private function errorHandler($r = null)
@@ -75,5 +101,19 @@ class Router
                     break;
             }
         });
+    }
+
+    private function auth($r = null)
+    {
+        $auth = new Auth();
+
+        if (!$auth->isLoggedIn()) {
+            $r->respond(function ($request, $response) {
+                if ($request->uri() != '/login' && $request->uri() != '/logout') {
+                    $response->redirect('/login')->send();
+                    die();
+                }
+            });
+        }
     }
 }
