@@ -22,16 +22,29 @@ class Views
 
     public function run($class, $data = [])
     {
-        $name = $this->setViewName($class);
+        $name = $this->setFileNamePrefix($class);
         
         echo $this->blade->run($name, $data);
     }
 
-    private function setViewName($class)
+    /**
+     * setFileNamePrefix
+     * 
+     * @param string $class = class name, e.g: Madam\HomeController
+     * @param string $fileName
+     */
+    private function setFileNamePrefix($class)
     {
-        $spl = explode('\\', $class);
-        $lower = strtolower($spl[1]);
+        $spl    = explode('\\', $class);
+        $lower  = strtolower($spl[1]);
 
-        return $lower;
+        $endStr     = substr($lower, -10);
+        $endLen     = strlen($endStr);
+        $fullLen    = strlen($lower);
+        $strPos     = $fullLen - $endLen;
+
+        $fileName = substr($lower, 0, $strPos);
+    
+        return $fileName;
     }
 }
