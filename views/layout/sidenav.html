@@ -1,0 +1,28 @@
+<div class="col-xl-2">
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="/">
+                    <i class="fas fa-home m-3"></i> Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="/customers">
+                    <i class="fas fa-file-contract m-3"></i> Customers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="/cid">
+                    <i class="fas fa-laptop m-3"></i> CID
+                </a>
+            </li>
+            @if($admin)
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="/users">
+                    <i class="fas fa-users m-3"></i> Users
+                </a>
+            </li>
+            @endif
+        </ul>
+    </nav>
+</div>
