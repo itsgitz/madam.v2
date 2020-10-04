@@ -8,6 +8,7 @@ namespace Madam;
 
 
 use mysqli;
+use mysqli_sql_exception;
 
 class Database
 {
@@ -42,7 +43,7 @@ class Database
         // check connection
         if ($this->getConnection()->connect_errno) {
             die('database connection failed' . $this->getConnection()->connect_error);
-        } 
+        }
 
         if (!$this->isMigrations()) {
             $this->runMigrations();
@@ -103,9 +104,28 @@ class Database
             customer_name VARCHAR(128) NOT NULL,
             location VARCHAR(64) NOT NULL,
             rack_location VARCHAR(64) NOT NULL,
+            ip_address VARCHAR(64) NOT NULL,
+            subnetmask VARCHAR(64) NOT NULL,
+            gateway VARCHAR(64) NOT NULL,
+            fpb_date TIMESTAMP,
+            of_date TIMESTAMP,
+            ob_date TIMESTAMP,
+            u_location VARCHAR(32) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
         ";
+
+        // sql query for create access_rights table
+        $sqlQuery['create_access_rights_table'] = "CREATE TABLE IF NOT EXISTS {$_ENV['ACCESS_RIGHTS_TABLE']} (
+            id INT (6) AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(64) NOT NULL,
+            company_name VARCHAR(64) NOT NULL,
+            identity_number VARCHAR(64) NOT NULL,
+            email VARCHAR(64) NOT NULL
+        )";
+
+        // $sqlQuery['create_networking_table'] = "CREATE TABLE IF NOT EXISTS {$_ENV['NETWORKING_TABLE']}
+        //     ";
 
         // run migrations queries
         foreach ($sqlQuery as $q) {
@@ -119,30 +139,49 @@ class Database
 
     private function migrationSeeder()
     {
-        $customerSeeder = "INSERT INTO {$_ENV['CUSTOMER_TABLE']} (customer_name, sales_name, segmentation)
-            VALUES ('Bank QNB Indonesia', 'Sivi Paramudhita', 'Finance')";
+        $customerSeeder     = "INSERT INTO {$_ENV['CUSTOMER_TABLE']} (customer_name, sales_name, segmentation)
+            VALUES ('Bank QNB Indonesia', 'Sivi Paramudhita', 'Finance');";
 
-        $hashedPassword = password_hash($_ENV['DB_PASSWORD'], PASSWORD_DEFAULT, ['cost' => 15]);
+        $customerSeeder     .= "INSERT INTO {$_ENV['CUSTOMER_TABLE']} (customer_name, sales_name, segmentation)
+            VALUES ('Citiink Indonesia', 'Ahmad Nurwakhid', 'Transportation');";
 
-        $userSeeder = "INSERT INTO {$_ENV['USER_TABLE']} (name, username, password, email, activated, user_role)
-            VALUES ('Gatta Pherasi Aditama', 'GTT', '{$hashedPassword}', 'gatta.aditama@lintasarta.co.id', 'Yes', 'Administrator')";
+        $customerSeeder     .= "INSERT INTO {$_ENV['CUSTOMER_TABLE']} (customer_name, sales_name, segmentation)
+            VALUES ('Dummy Dumb Indonesia', 'Dummy Sudrajat', 'Services')";
 
-        $cidSeeder = "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location)
-            VALUES ('2012006972', 'DRC', 'Bank QNB Indonesia', 'TBS Lt. 1', 'Cage A')";
+        $hashedPassword = password_hash($_ENV['DB_PASSWORD'], PASSWORD_DEFAULT);
+
+        $userSeeder     = "INSERT INTO {$_ENV['USER_TABLE']} (name, username, password, email, activated, user_role)
+            VALUES ('Gatta Pherasi Aditama', 'gtt', '{$hashedPassword}', 'gatta.aditama@lintasarta.co.id', 'Yes', 'Administrator');";
+
+        $userSeeder     .= "INSERT INTO {$_ENV['USER_TABLE']} (name, username, password, email, activated, user_role)
+            VALUES ('Ellan Marsage', 'ell', '{$hashedPassword}', 'ellan.marsage@lintasarta.co.id', 'Yes', 'Technician');";
+
+        $userSeeder     .= "INSERT INTO {$_ENV['USER_TABLE']} (name, username, password, email, activated, user_role)
+                VALUES ('Dummy Dumb', 'dmm', '{$hashedPassword}', 'dummy.dumb@lintasarta.co.id', 'Yes', 'Technician')";
+
+        $cidSeeder  = "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location,
+            ip_address, subnetmask, gateway, fpb_date, of_date, ob_date, u_location)
+            VALUES ('2012006972', 'DRC', 'Bank QNB Indonesia', 'TBS Lt. 1', 'Cage A',
+            '127.0.0.1', '255.255.255.0', '127.0.0.1', '2020-01-01 00:00:00', '2020-01-01 00:00:00', '2020-01-01 00:00:00', 'U1-45');";
+        
+        $cidSeeder  .= "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location,
+            ip_address, subnetmask, gateway, fpb_date, of_date, ob_date, u_location)
+            VALUES ('2020000020', 'Facility Management', 'Dummy Dumb Indonesia', 'TBS Lt. 1', 'Cage B',
+            '127.0.0.1', '255.255.255.0', '127.0.0.1', '2020-01-01 00:00:00', '2020-01-01 00:00:00', '2020-01-01 00:00:00', 'U1-45')";
 
         // customer data seeder
-        if ($this->getConnection()->query("SELECT * FROM {$_ENV['CUSTOMER_TABLE']}")->num_rows == 0) {
-            $this->getConnection()->query($customerSeeder);
+        if ($this->getConnection()->query("SELECT * FROM {$_ENV['CUSTOMER_TABLE']}")->num_rows < 3) {
+            $this->getConnection()->multi_query($customerSeeder);
         }
 
         // user data seeder
-        if ($this->getConnection()->query("SELECT * FROM {$_ENV['USER_TABLE']}")->num_rows == 0) {
-            $this->getConnection()->query($userSeeder);
+        if ($this->getConnection()->query("SELECT * FROM {$_ENV['USER_TABLE']}")->num_rows < 3) {
+            $this->getConnection()->multi_query($userSeeder);
         }
 
         // cid data seeder
-        if ($this->getConnection()->query("SELECT * FROM {$_ENV['CID_TABLE']}")->num_rows == 0) {
-            $this->getConnection()->query($cidSeeder);
+        if ($this->getConnection()->query("SELECT * FROM {$_ENV['CID_TABLE']}")->num_rows < 2) {
+            $this->getConnection()->multi_query($cidSeeder);
         }
 
         $this->getConnection()->close();
