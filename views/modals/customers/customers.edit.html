@@ -1,0 +1,35 @@
+<!-- Edit customer modal -->
+<div id="editModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Customer</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="/customers?request=edit">
+                    <div class="form-group">
+                        <label for="editCustomerName">Customer Name</label>
+                        <input id="editCustomerName" class="form-control" type="text" name="customer_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSalesName">Sales Name</label>
+                        <input id="editSalesName" class="form-control" type="text" name="sales_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSegmentation">Segmentation</label>
+                        <input id="editSegmentation" class="form-control" type="text" name="segmentation" required>
+                    </div>
+
+                    <input id="editCustomerId" type="hidden" name="customer_id">
+                    <input class="btn btn-primary form-control" type="submit" value="Save">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-ban"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
