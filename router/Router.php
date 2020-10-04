@@ -43,9 +43,12 @@ class Router
     private function setController()
     {
         return [
-            'Home' => new Home(),
-            'Login' => new Login(),
-            'Users' => new Users(),
+            'HomeController' => new HomeController(),
+            'LoginController' => new LoginController(),
+            'UsersController' => new UsersController(),
+            'LogoutController' => new LogoutController(),
+            'CustomersController' => new CustomersController(),
+            'CIDController' => new CIDController(),
         ];
     }
 
@@ -53,10 +56,15 @@ class Router
     {
         $this->controllers = $this->setController();
 
-        $r->respond('GET', '/', $this->setCallbackController($this->controllers['Home'], Http::METHOD_GET));
-        $r->respond('GET', '/login', $this->setCallbackController($this->controllers['Login'], Http::METHOD_GET));
-        $r->respond('POST', '/login', $this->setCallbackController($this->controllers['Login'], Http::METHOD_POST));
-        // $r->respond('GET', '/users', $this->setCallbackController($this->controllers['Users'], Http::METHOD_GET));
+        $r->respond('GET', '/', $this->setCallbackController($this->controllers['HomeController'], Http::METHOD_GET));
+        $r->respond('GET', '/login', $this->setCallbackController($this->controllers['LoginController'], Http::METHOD_GET));
+        $r->respond('POST', '/login', $this->setCallbackController($this->controllers['LoginController'], Http::METHOD_POST));
+        $r->respond('GET', '/logout', $this->setCallbackController($this->controllers['LogoutController'], Http::METHOD_GET));
+        $r->respond('GET', '/customers', $this->setCallbackController($this->controllers['CustomersController'], Http::METHOD_GET));
+        $r->respond('GET', '/users', $this->setCallbackController($this->controllers['UsersController'], Http::METHOD_GET));
+        $r->respond('GET', '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_GET));
+        $r->respond('POST', '/customers', $this->setCallbackController($this->controllers['CustomersController'], Http::METHOD_POST));
+        $r->respond('POST', '/users', $this->setCallbackController($this->controllers['UsersController'], Http::METHOD_POST));
     }
 
     private function setCallbackController($obj = null, $method)
@@ -96,7 +104,7 @@ class Router
                     // default error
                 default:
                     $router->response()->body(
-                        'Something went wrong :('
+                        'Something went wrong, this error is occured from router :('
                     );
                     break;
             }
