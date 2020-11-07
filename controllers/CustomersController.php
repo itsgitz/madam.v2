@@ -29,12 +29,14 @@ class CustomersController extends BaseController
 
         $this->customers = new Customer();
         $this->bind['customers'] = $this->customers->getCustomers();
+        $this->bind['success_message'] = '';
+        $this->bind['error_message'] = '';
     }
 
     public function index()
     {
         if (isset($_GET)) {
-            $successParam = $_GET['success'];
+            $successParam = isset($_GET['success']) ? $_GET['success'] : '';
 
             switch ($successParam) {
 
