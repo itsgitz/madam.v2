@@ -50,15 +50,15 @@
                         <th class="text-center" colspan="2">Action</th>
                         @foreach($users as $u)
                         <tr>
-                            <td>{{$u['id']}}</td>
-                            <td>{{$u['name']}}</td>
-                            <td>{{$u['username']}}</td>
-                            <td>{{$u['email']}}</td>
-                            <td>{{$u['activated']}}</td>
-                            <td>{{$u['user_role']}}</td>
-                            <td>{{$u['created_at']}}</td>
-                            <td><button class="btn btn-warning text-light"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
-                            <td><button class="btn btn-danger"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
+                            <td class="text-center">{{$u['id']}}</td>
+                            <td class="text-center">{{$u['name']}}</td>
+                            <td class="text-center">{{$u['username']}}</td>
+                            <td class="text-center">{{$u['email']}}</td>
+                            <td class="text-center">{{$u['activated']}}</td>
+                            <td class="text-center">{{$u['user_role']}}</td>
+                            <td class="text-center">{{$u['created_at']}}</td>
+                            <td class="text-center"><button class="btn btn-warning text-light"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
+                            <td class="text-center"><button class="btn btn-danger"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
                         </tr>
                         @endforeach
                     </table>
