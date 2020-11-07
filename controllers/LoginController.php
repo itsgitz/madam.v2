@@ -9,13 +9,15 @@ namespace Madam;
 
 class LoginController extends BaseController
 {
-    private $bind = [];
+    private $bind;
     private $users;
 
     function __construct()
     {
         $this->users = new User();
+        $this->bind = [];
         $this->bind['title'] = 'Login to Madam v.2.0';
+        $this->bind['error_message'] = '';
     }
 
     public function index()
