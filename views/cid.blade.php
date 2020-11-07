@@ -52,17 +52,17 @@
                         <th class="text-center" colspan="3">Action</th>
                         @foreach($cid as $c)
                         <tr>
-                            <td>{{$c['id']}}</td>
-                            <td>{{$c['cid']}}</td>
-                            <td>{{$c['service_name']}}</td>
-                            <td>{{$c['customer_name']}}</td>
-                            <td>{{$c['location']}}</td>
-                            <td>{{$c['rack_location']}}</td>
-                            <td>{{$c['created_at']}}</td>
-                            <td><button class="btn btn-info"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
+                            <td class="text-center">{{$c['id']}}</td>
+                            <td class="text-center">{{$c['cid']}}</td>
+                            <td class="text-center">{{$c['service_name']}}</td>
+                            <td class="text-center">{{$c['customer_name']}}</td>
+                            <td class="text-center">{{$c['location']}}</td>
+                            <td class="text-center">{{$c['rack_location']}}</td>
+                            <td class="text-center">{{$c['created_at']}}</td>
+                            <td class="text-center"><button class="btn btn-info"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
                             @if($admin)
-                            <td><button class="btn btn-warning text-light"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
-                            <td><button class="btn btn-danger"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
+                            <td class="text-center"><button class="btn btn-warning text-light"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
+                            <td class="text-center"><button class="btn btn-danger"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
                             @endif
                         </tr>
                         @endforeach
