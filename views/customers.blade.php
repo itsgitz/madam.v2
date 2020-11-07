@@ -69,17 +69,17 @@
                         <th class="text-center" colspan="3">Action</th>
                         @foreach($customers as $c)
                         <tr>
-                            <td>{{$c['id']}}</td>
-                            <td>{{$c['customer_name']}}</td>
-                            <td>{{$c['sales_name']}}</td>
-                            <td>{{$c['segmentation']}}</td>
-                            <td>{{$c['created_at']}}</td>
-                            <td><button id="viewBtn" class="btn btn-info" data-toggle="modal" data-target="#viewModal" data-customer-id="{!! $c['id'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-sales-name="{!! $c['sales_name'] !!}" data-segmentation="{!! $c['segmentation'] !!}"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
+                            <td class="text-center">{{$c['id']}}</td>
+                            <td class="text-center">{{$c['customer_name']}}</td>
+                            <td class="text-center">{{$c['sales_name']}}</td>
+                            <td class="text-center">{{$c['segmentation']}}</td>
+                            <td class="text-center">{{$c['created_at']}}</td>
+                            <td class="text-center"><button id="viewBtn" class="btn btn-info" data-toggle="modal" data-target="#viewModal" data-customer-id="{!! $c['id'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-sales-name="{!! $c['sales_name'] !!}" data-segmentation="{!! $c['segmentation'] !!}"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
                             @if($admin)
-                            <td>
+                            <td class="text-center">
                                 <button id="editBtn" class="btn btn-warning text-light" data-toggle="modal" data-target="#editModal" data-customer-id="{!! $c['id'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-sales-name="{!! $c['sales_name'] !!}" data-segmentation="{!! $c['segmentation'] !!}"><span class="small"><i class="fas fa-edit"></i> Edit</span></button>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <button id="removeBtn" class="btn btn-danger" data-toggle="modal" data-target="#removeModal" data-customer-id="{!! $c['id'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-sales-name="{!! $c['sales_name'] !!}">
                                     <span class="small"><i class="fas fa-trash"></i> Remove</span>
                                 </button>
