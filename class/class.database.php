@@ -8,7 +8,7 @@ namespace Madam;
 
 
 use mysqli;
-use mysqli_sql_exception;
+
 
 class Database
 {
@@ -50,12 +50,27 @@ class Database
         }
     }
 
+    private function getNumOfTables()
+    {
+        $tables = [
+            $_ENV['CUSTOMER_TABLE'],
+            $_ENV['USER_TABLE'],
+            $_ENV['CID_TABLE'],
+            $_ENV['ACCESS_RIGHTS_TABLE'],
+            // $_ENV['NETWORKING_TABLE']
+        ];
+
+        $num = count($tables);
+
+        return $num;
+    }
+
     public function isMigrations()
     {
         $showTables = 'SHOW TABLES';
         $result = $this->getConnection()->query($showTables);
 
-        if ($result->num_rows < 3) {
+        if ($result->num_rows != $this->getNumOfTables()) {
             return false;
         } else {
             return true;
@@ -130,7 +145,7 @@ class Database
         // run migrations queries
         foreach ($sqlQuery as $q) {
             if (!$this->getConnection()->query($q)) {
-                die('Unable run migrations query: ' . $q . ', error: ' . $this->getConnection()->error);
+                die('Unable to run migrations query: ' . $q . ', error: ' . $this->getConnection()->error);
             }
         }
 
