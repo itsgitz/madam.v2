@@ -15,11 +15,13 @@ class App
 
     function __construct()
     {
-        
     }
-    
-    public function run()
+
+    public function run($showError = false)
     {
+        // show error if true
+        $this->showError($showError);
+
         // load environment variables from .env
         $this->loadEnv();
 
@@ -46,5 +48,13 @@ class App
     {
         $router = new Router();
         $router->init();
+    }
+
+    public function showError($show = false)
+    {
+        if ($show) {
+            error_reporting(E_ALL);
+            ini_set('display_errors', 1);
+        }
     }
 }
