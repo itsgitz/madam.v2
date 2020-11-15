@@ -28,7 +28,7 @@ class User
                 array_push($data, $row);
             }
             $this->db->getConnection()->close();
-            
+
             return $data;
         } else {
             return null;
@@ -75,7 +75,14 @@ class User
         $stmt = $this->db->getConnection()->prepare("INSERT INTO {$this->table} (name, username, password, email, activated, user_role)
             VALUES (?, ?, ?, ?, ?, ?)");
 
-        $stmt->bind_param('ssssss', $param['name'], $param['username'], $param['password'], $param['email'], $param['activated'], $param['user_role']);
+        $stmt->bind_param('ssssss',
+            $param['name'], 
+            $param['username'],
+            $param['password'],
+            $param['email'],
+            $param['status'],
+            $param['role']
+        );
 
         $success = $stmt->execute();
 
@@ -98,7 +105,7 @@ class User
         foreach ($param as $k => $v) {
             $set    .= "$k = ?, ";
             $types  .= 's';
-            
+
             array_push($argV, $v);
         }
 
@@ -114,7 +121,7 @@ class User
         $stmt = $this->db->getConnection()->prepare("UPDATE {$this->table}
             SET $update
             WHERE id = ?");
-        
+
         $stmt->bind_param($types, ...$argV);
         $success = $stmt->execute();
 
@@ -140,6 +147,37 @@ class User
             return false;
         } else {
             return true;
+        }
+    }
+
+    public function searchUser($key)
+    {
+        $data = [];
+        $keyFormat = "%" . $key . "%";
+
+        $stmt = $this->db->getConnection()->prepare("SELECT * FROM {$this->table} WHERE
+            name LIKE ? OR
+            username LIKE ? OR
+            email LIKE ? OR
+            activated LIKE ? OR
+            user_role LIKE ? OR");
+
+        $stmt->bind_param('sssss', $keyFormat, $keyFormat, $keyFormat, $keyFormat);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($data, $row);
+            }
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            $this->db->getConnection()->close();
+
+            return null;
         }
     }
 }
