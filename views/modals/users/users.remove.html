@@ -1,0 +1,25 @@
+<!-- Remove user modal -->
+<div class="modal" id="removeModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Remove User</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Are you sure want to remove <strong><span class="text-info" id="userNameValue"></span></strong>
+                    (Name: <strong><span class="text-info" id="nameValue"></span></strong>)
+                </p>
+            </div>
+
+            <div class="modal-footer justify-content-center align-items-center">
+                <form method="POST" action="/users?request=remove">
+                    <input type="submit" class="btn btn-primary" value="Yes">
+                    <input name="user_id" id="userIdValue" type="hidden">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
