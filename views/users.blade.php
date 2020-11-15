@@ -16,6 +16,9 @@
         <div class="row">
             @include('./layout/sidenav.html')
             <div class="col">
+                <!-- form messages here -->
+                @include('./layout/messages.html')
+                
                 <!-- Search -->
                 <div class="row py-3">
                     <div class="col-6">
@@ -66,7 +69,7 @@
             </div>
         </div>
     </div>
-    
+
     @include('./modals/users/users.add.html')
     @include('./layout/footer.html')
 </body>
