@@ -5,10 +5,6 @@ namespace Madam;
 
 class CustomersController extends BaseController
 {
-    const ADD_REQUEST = 'add';
-    const REMOVE_REQUEST = 'remove';
-    const EDIT_REQUEST = 'edit';
-    const SEARCH_REQUEST = 'search';
     const SUCCESS_ADD_CUSTOMER = 'add_customer';
     const SUCCESS_REMOVE_CUSTOMER = 'remove_customer';
     const SUCCESS_EDIT_CUSTOMER = 'edit_customer';
@@ -41,16 +37,16 @@ class CustomersController extends BaseController
             switch ($successParam) {
 
                 case self::SUCCESS_ADD_CUSTOMER: // add customer
-                    $this->bind['success_message'] = 'Successfully create a new customer!';
+                    $this->bind['success_message'] = 'Successfully created a new customer!';
                     break;
 
-                case self::SUCCESS_EDIT_CUSTOMER:
-                    $this->bind['success_message'] = 'Successfully update a customer!';
+                case self::SUCCESS_EDIT_CUSTOMER: // edit customer
+                    $this->bind['success_message'] = 'Successfully updated a customer!';
                     break;
 
 
                 case self::SUCCESS_REMOVE_CUSTOMER: // remove customer
-                    $this->bind['success_message'] = 'Successfully remove customer!';
+                    $this->bind['success_message'] = 'Successfully removed customer!';
                     break;
             }
         }
@@ -60,24 +56,24 @@ class CustomersController extends BaseController
 
     public function post()
     {
-        $requestParam = $_GET['request'];
+        $requestParam = isset($_GET['request']) ? $_GET['request'] : '';
 
         switch ($requestParam) {
 
-            case self::ADD_REQUEST: // add a new customer request
+            case Http::ADD_REQUEST: // add a new customer request
                 $this->addCustomer($_POST);
                 break;
 
 
-            case self::REMOVE_REQUEST: // remove a customer
+            case Http::REMOVE_REQUEST: // remove a customer
                 $this->removeCustomer($_POST);
                 break;
 
-            case self::EDIT_REQUEST:
+            case Http::EDIT_REQUEST:
                 $this->editCustomer($_POST);
                 break;
 
-            case self::SEARCH_REQUEST:
+            case Http::SEARCH_REQUEST:
                 $this->searchCustomer($_POST);
                 break;
         }
@@ -107,7 +103,7 @@ class CustomersController extends BaseController
                 $success = $this->customers->addCustomer($param);
 
                 if (!$success) {
-                    $this->bind['error_message'] = 'Something went wrong, cannot create new customer data. Please contact administrator.';
+                    $this->bind['error_message'] = 'Something went wrong, cannot created new customer data. Please contact administrator.';
                 } else {
                     header('Location: /customers?success=add_customer');
                     die();
@@ -134,7 +130,7 @@ class CustomersController extends BaseController
                 $update = $this->customers->updateCustomer($id, $param);
 
                 if (!$update) {
-                    $this->bind['error_message'] = 'Something went wrong, cannot update customer data. Please contact administrator';
+                    $this->bind['error_message'] = 'Something went wrong, cannot updated customer data. Please contact administrator';
                 } else {
                     header('Location: /customers?success=edit_customer');
                     die();
@@ -155,7 +151,7 @@ class CustomersController extends BaseController
                 $success = $this->customers->removeCustomer($id);
 
                 if (!$success) {
-                    $this->bind['error_message'] = 'Something went wrong, cannot remove customer data. Please contact administrator.';
+                    $this->bind['error_message'] = 'Something went wrong, cannot removed customer data. Please contact administrator.';
                 } else {
                     header('location: /customers?success=remove_customer');
                     die();
