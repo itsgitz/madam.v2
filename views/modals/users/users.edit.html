@@ -1,0 +1,53 @@
+<!-- Edit customer modal -->
+<div id="editModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit User</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="/users?request=edit">
+                    <div class="form-group">
+                        <label for="editUserName">Username</label>
+                        <input id="editUserName" class="form-control" type="text" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="editName">Name</label>
+                        <input id="editName" class="form-control" type="text" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editPassword">Password</label>
+                        <input id="editPassword" class="form-control" type="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">E-mail Address</label>
+                        <input id="editEmail" class="form-control" type="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="editStatus">Activated (status)</label>
+                        <select id="editStatus" class="custom-select" name="status">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editRole">Role</label>
+                        <select id="editRole" class="custom-select" name="role">
+                            <option value="Technician">Technician</option>
+                            <option value="Administrator">Administrator</option>
+                        </select>
+                    </div>
+                    <input id="editUserId" type="hidden" name="user_id">
+                    <input class="btn btn-primary form-control" type="submit" value="Save">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-ban"></i>
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>
