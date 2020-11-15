@@ -3,7 +3,6 @@ $(function() {
      * Modals
      */
     let removeModal = $('#removeModal'),
-        viewModal = $('#viewModal'),
         editModal = $('#editModal');
 
     /**
@@ -13,27 +12,13 @@ $(function() {
         nameValue = $('#nameValue'),
         userIdValue = $('#userIdValue');
 
-    let viewCustomerName = $('#viewCustomerName');
-    let viewSalesName = $('#viewSalesName');
-    let viewSegmentation = $('#viewSegmentation');
-
-    let editCustomerId = $('#editCustomerId');
-    let editCustomerName = $('#editCustomerName');
-    let editSalesName = $('#editSalesName');
-    let editSegmentation = $('#editSegmentation');
-
-    /**
-     * View modal on click
-     */
-    viewModal.on('show.bs.modal', function(e) {
-        let customerName = $(e.relatedTarget).data('customer-name');
-        let salesName = $(e.relatedTarget).data('sales-name');
-        let segmentation = $(e.relatedTarget).data('segmentation');
-
-        viewCustomerName.val(customerName);
-        viewSalesName.val(salesName);
-        viewSegmentation.val(segmentation);
-    });
+    let editUserName = $('#editUserName'),
+        editName = $('#editName'),
+        editPassword = $('#editPassword'),
+        editEmail = $('#editEmail'),
+        editStatus = $('#editStatus'),
+        editRole = $('#editRole'),
+        editUserId = $('#editUserId');
 
     /**
      * Remove modal on click
@@ -54,14 +39,20 @@ $(function() {
      * Edit modal on click
      */
     editModal.on('show.bs.modal', function(e) {
-        let customerId = $(e.relatedTarget).data('customer-id');
-        let customerName = $(e.relatedTarget).data('customer-name');
-        let salesName = $(e.relatedTarget).data('sales-name');
-        let segmentation = $(e.relatedTarget).data('segmentation');
+        let userId = $(e.relatedTarget).data('id'),
+            name = $(e.relatedTarget).data('name'),
+            userName = $(e.relatedTarget).data('username'),
+            email = $(e.relatedTarget).data('email'),
+            status = $(e.relatedTarget).data('activated'),
+            role = $(e.relatedTarget).data('user-role');
 
-        editCustomerId.val(customerId);
-        editCustomerName.val(customerName);
-        editSalesName.val(salesName);
-        editSegmentation.val(segmentation);
+        console.warn(userId, name, userName, status, role);
+
+        editUserId.val(userId);
+        editUserName.val(userName);
+        editName.val(name);
+        editEmail.val(email);
+        editStatus.val(status);
+        editRole.val(role);
     });
 });
