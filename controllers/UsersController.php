@@ -130,9 +130,9 @@ class UsersController extends BaseController
                     'username' => $post['username'],
                     'name' => $post['name'],
                     'password' => $hashedPassword,
-                    'role' => $post['role'],
+                    'user_role' => $post['role'],
                     'email' => $post['email'],
-                    'status' => $post['status']
+                    'activated' => $post['status']
                 ];
 
                 $updated = $this->users->updateUser($id, $param);
