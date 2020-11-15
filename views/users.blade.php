@@ -4,6 +4,7 @@
 <head>
     <title>{{$title}}</title>
     @include('./layout/header.html')
+    <script src="/assets/js/users.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -18,7 +19,7 @@
             <div class="col">
                 <!-- form messages here -->
                 @include('./layout/messages.html')
-                
+
                 <!-- Search -->
                 <div class="row py-3">
                     <div class="col-6">
@@ -61,7 +62,7 @@
                             <td class="text-center">{{$u['user_role']}}</td>
                             <td class="text-center">{{$u['created_at']}}</td>
                             <td class="text-center"><button class="btn btn-warning text-light"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
-                            <td class="text-center"><button class="btn btn-danger"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
+                            <td class="text-center"><button id="removeBtn" class="btn btn-danger" data-toggle="modal" data-target="#removeModal" data-user-id="{!! $u['id'] !!}" data-user-name="{!! $u['name'] !!}" data-username="{!! $u['username'] !!}"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
                         </tr>
                         @endforeach
                     </table>
@@ -71,6 +72,7 @@
     </div>
 
     @include('./modals/users/users.add.html')
+    @include('./modals/users/users.remove.html')
     @include('./layout/footer.html')
 </body>
 
