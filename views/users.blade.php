@@ -61,7 +61,7 @@
                             <td class="text-center">{{$u['activated']}}</td>
                             <td class="text-center">{{$u['user_role']}}</td>
                             <td class="text-center">{{$u['created_at']}}</td>
-                            <td class="text-center"><button class="btn btn-warning text-light"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
+                            <td class="text-center"><button id="editBtn" class="btn btn-warning text-light" data-toggle="modal" data-target="#editModal" data-id="{!! $u['id'] !!}" data-name="{!! $u['name'] !!}" data-username="{!! $u['username'] !!}" data-email="{!! $u['email'] !!}" data-activated="{!! $u['activated'] !!}" data-user-role="{!! $u['user_role'] !!}"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
                             <td class="text-center"><button id="removeBtn" class="btn btn-danger" data-toggle="modal" data-target="#removeModal" data-user-id="{!! $u['id'] !!}" data-user-name="{!! $u['name'] !!}" data-username="{!! $u['username'] !!}"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
                         </tr>
                         @endforeach
@@ -73,6 +73,7 @@
 
     @include('./modals/users/users.add.html')
     @include('./modals/users/users.remove.html')
+    @include('./modals/users/users.edit.html')
     @include('./layout/footer.html')
 </body>
 
