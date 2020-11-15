@@ -19,21 +19,8 @@
         <div class="row">
             @include('./layout/sidenav.html')
             <div class="col">
-                <!-- error message -->
-                @if($error_message)
-                <div class="alert alert-danger alert-dismissible fade show">
-                    <button class="close" data-dismiss="alert" type="button">&times;</button>
-                    {{$error_message}}
-                </div>
-                @endif
-
-                <!-- success message -->
-                @if($success_message)
-                <div class="alert alert-success alert-dismissible fade show">
-                    <button class="close" data-dismiss="alert" type="button">&times;</button>
-                    {{$success_message}}
-                </div>
-                @endif
+                <!-- form messages here -->
+                @include('./layout/messages.html')
 
                 <!-- Search -->
                 <div class="row py-3">
