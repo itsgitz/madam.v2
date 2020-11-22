@@ -4,6 +4,7 @@
 <head>
     <title>{{$title}}</title>
     @include('./layout/header.html')
+    <script src="/assets/js/cid.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -62,10 +63,10 @@
                             <td class="text-center">{{$c['rack_location']}}</td>
                             <td class="text-center">{{$c['u_location']}}</td>
                             <td class="text-center">{{$c['created_at']}}</td>
-                            <td class="text-center"><button class="btn btn-info"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
+                            <td class="text-center"><button class="btn btn-info" data-toggle="modal" data-target="#viewModal" data-id="{!! $c['id'] !!}" data-cid="{!! $c['cid'] !!}" data-service-name="{!! $c['service_name'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-location="{!! $c['location'] !!}" data-rack-location="{!! $c['rack_location'] !!}" data-u-location="{!! $c['u_location'] !!}"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
                             @if($admin)
-                            <td class="text-center"><button class="btn btn-warning text-light"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
-                            <td class="text-center"><button class="btn btn-danger"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
+                            <td class="text-center"><button class="btn btn-warning text-light" data-toggle="modal" data-target="#editModal" data-id="{!! $c['id'] !!}" data-cid="{!! $c['cid'] !!}" data-service-name="{!! $c['service_name'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-location="{!! $c['location'] !!}" data-rack-location="{!! $c['rack_location'] !!}" data-u-location="{!! $c['u_location'] !!}"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
+                            <td class="text-center"><button class="btn btn-danger" data-toggle="modal" data-target="#removeModal" data-id="{!! $c['id'] !!}" data-cid="{!! $c['cid'] !!}" data-service-name="{!! $c['service_name'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-location="{!! $c['location'] !!}"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
                             @endif
                         </tr>
                         @endforeach
@@ -75,6 +76,9 @@
         </div>
     </div>
     @include('./modals/cid/cid.add.html')
+    @include('./modals/cid/cid.edit.html')
+    @include('./modals/cid/cid.remove.html')
+    @include('./modals/cid/cid.view.html')
     @include('./layout/footer.html')
 </body>
 
