@@ -65,6 +65,7 @@ class Router
         $r->respond('GET', '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_GET));
         $r->respond('POST', '/customers', $this->setCallbackController($this->controllers['CustomersController'], Http::METHOD_POST));
         $r->respond('POST', '/users', $this->setCallbackController($this->controllers['UsersController'], Http::METHOD_POST));
+        $r->respond('POST', '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_POST));
     }
 
     private function setCallbackController($obj = null, $method)
