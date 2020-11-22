@@ -124,6 +124,8 @@ class CID
             array_push($argV, $v);
         }
 
+        array_push($argV, $id);
+
         $types .= 'i';
 
         $update = rtrim($set, ', ');
