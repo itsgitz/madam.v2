@@ -119,12 +119,6 @@ class Database
             customer_name VARCHAR(128) NOT NULL,
             location VARCHAR(64) NOT NULL,
             rack_location VARCHAR(64) NOT NULL,
-            ip_address VARCHAR(64) NOT NULL,
-            subnetmask VARCHAR(64) NOT NULL,
-            gateway VARCHAR(64) NOT NULL,
-            fpb_date TIMESTAMP,
-            of_date TIMESTAMP,
-            ob_date TIMESTAMP,
             u_location VARCHAR(32) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
@@ -174,15 +168,11 @@ class Database
         $userSeeder     .= "INSERT INTO {$_ENV['USER_TABLE']} (name, username, password, email, activated, user_role)
                 VALUES ('Dummy Dumb', 'dmm', '{$hashedPassword}', 'dummy.dumb@lintasarta.co.id', 'Yes', 'Technician')";
 
-        $cidSeeder  = "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location,
-            ip_address, subnetmask, gateway, fpb_date, of_date, ob_date, u_location)
-            VALUES ('2012006972', 'DRC', 'Bank QNB Indonesia', 'TBS Lt. 1', 'Cage A',
-            '127.0.0.1', '255.255.255.0', '127.0.0.1', '2020-01-01 00:00:00', '2020-01-01 00:00:00', '2020-01-01 00:00:00', 'U1-45');";
+        $cidSeeder  = "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location, u_location)
+            VALUES ('2012006972', 'DRC', 'Bank QNB Indonesia', 'TBS Lt. 1', 'Cage A', 'U1-45');";
         
-        $cidSeeder  .= "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location,
-            ip_address, subnetmask, gateway, fpb_date, of_date, ob_date, u_location)
-            VALUES ('2020000020', 'Facility Management', 'Dummy Dumb Indonesia', 'TBS Lt. 1', 'Cage B',
-            '127.0.0.1', '255.255.255.0', '127.0.0.1', '2020-01-01 00:00:00', '2020-01-01 00:00:00', '2020-01-01 00:00:00', 'U1-45')";
+        $cidSeeder  .= "INSERT INTO {$_ENV['CID_TABLE']} (cid, service_name, customer_name, location, rack_location, u_location)
+            VALUES ('2020000020', 'Facility Management', 'Dummy Dumb Indonesia', 'TBS Lt. 1', 'Cage B', 'U1-45')";
 
         // customer data seeder
         if ($this->getConnection()->query("SELECT * FROM {$_ENV['CUSTOMER_TABLE']}")->num_rows < 3) {
