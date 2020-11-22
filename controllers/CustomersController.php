@@ -18,7 +18,7 @@ class CustomersController extends BaseController
         $this->sessions = $this->sessionsInit()->getSessions();
 
         $this->bind = [
-            'title' => 'Customer',
+            'title' => 'Customer - Madam v.2.0',
             'name' => $this->sessions['name'],
             'admin' => $this->sessions['admin']
         ];

@@ -22,7 +22,7 @@ class UsersController extends BaseController
         $this->sessions = $this->sessionsInit()->getSessions();
         $this->users = new User();
         $this->bind = [
-            'title' => 'Users',
+            'title' => 'Users - Madam v.2.0',
             'name' => $this->sessions['name'],
             'admin' => $this->sessions['admin'],
             'users' => $this->users->getUsers(),

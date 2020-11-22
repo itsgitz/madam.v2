@@ -16,7 +16,7 @@ class HomeController extends BaseController
     {
         $this->sessions = $this->sessionsInit()->getSessions();
         $this->bind = [
-            'title' => 'Home',
+            'title' => 'Home - Madam v.2.0',
             'name' => $this->sessions['name'],
             'admin' => $this->sessions['admin']
         ];
