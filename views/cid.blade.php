@@ -16,7 +16,8 @@
         <div class="row">
             @include('./layout/sidenav.html')
             <div class="col">
-
+                <!-- form messages here -->
+                @include('./layout/messages.html')
                 <!-- Search -->
                 <div class="row py-3">
                     <div class="col-6">
@@ -48,6 +49,7 @@
                         <th class="text-center">Customer Name</th>
                         <th class="text-center">Location</th>
                         <th class="text-center">Rack Location</th>
+                        <th class="text-center">Unit Location</th>
                         <th class="text-center">Created At</th>
                         <th class="text-center" colspan="3">Action</th>
                         @foreach($cid as $c)
@@ -58,6 +60,7 @@
                             <td class="text-center">{{$c['customer_name']}}</td>
                             <td class="text-center">{{$c['location']}}</td>
                             <td class="text-center">{{$c['rack_location']}}</td>
+                            <td class="text-center">{{$c['u_location']}}</td>
                             <td class="text-center">{{$c['created_at']}}</td>
                             <td class="text-center"><button class="btn btn-info"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
                             @if($admin)
@@ -71,6 +74,7 @@
             </div>
         </div>
     </div>
+    @include('./modals/cid/cid.add.html')
     @include('./layout/footer.html')
 </body>
 
