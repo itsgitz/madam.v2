@@ -112,7 +112,7 @@ class User
         // id for the last argument
         array_push($argV, $id);
 
-        // add integer for id
+        // add integer type for id
         $types .= 'i';
 
         // remove last comma
