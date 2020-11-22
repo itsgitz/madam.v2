@@ -7,6 +7,7 @@ uninstall:
 	docker-compose down -v
 	docker system prune -f
 	rm -Rfv docker
+	rm -Rfv cache
 start:
 	docker-compose start
 stop:
