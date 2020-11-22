@@ -14,7 +14,6 @@ $(function() {
 
     let editUserName = $('#editUserName'),
         editName = $('#editName'),
-        editPassword = $('#editPassword'),
         editEmail = $('#editEmail'),
         editStatus = $('#editStatus'),
         editRole = $('#editRole'),
