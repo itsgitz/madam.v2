@@ -1,0 +1,43 @@
+<!-- Add cid modal -->
+<div id="addModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add CID</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/cid?request=add">
+                    <div class="form-group">
+                        <label for="cid">CID</label>
+                        <input id="cid" class="form-control" type="text" name="cid" placeholder="Enter the cid ..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service_name">Service Name</label>
+                        <input id="service_name" class="form-control" type="text" name="service_name" placeholder="Enter the service name ..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer_name">Customer Name</label>
+                        <input id="customer_name" class="form-control" type="text" name="customer_name" placeholder="Enter customer name ..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input id="location" class="form-control" type="text" name="location" placeholder="Enter the location ..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rack_location">Rack Location</label>
+                        <input id="rack_location" class="form-control" type="text" name="rack_location" placeholder="Enter the rack location ..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="u_location">Unit Location</label>
+                        <input id="unit_location" class="form-control" type="text" name="u_location" placeholder="Enter the unit location ..." required>
+                    </div>
+                    <input type="submit" class="form-control btn btn-primary" value="Create">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-ban"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
