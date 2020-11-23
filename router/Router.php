@@ -49,6 +49,7 @@ class Router
             'LogoutController' => new LogoutController(),
             'CustomersController' => new CustomersController(),
             'CIDController' => new CIDController(),
+            'SettingController' => new SettingController(),
         ];
     }
 
@@ -56,34 +57,36 @@ class Router
     {
         $this->controllers = $this->setController();
 
-        $r->respond('GET', '/', $this->setCallbackController($this->controllers['HomeController'], Http::METHOD_GET));
-        $r->respond('GET', '/login', $this->setCallbackController($this->controllers['LoginController'], Http::METHOD_GET));
-        $r->respond('POST', '/login', $this->setCallbackController($this->controllers['LoginController'], Http::METHOD_POST));
-        $r->respond('GET', '/logout', $this->setCallbackController($this->controllers['LogoutController'], Http::METHOD_GET));
-        $r->respond('GET', '/customers', $this->setCallbackController($this->controllers['CustomersController'], Http::METHOD_GET));
-        $r->respond('GET', '/users', $this->setCallbackController($this->controllers['UsersController'], Http::METHOD_GET));
-        $r->respond('GET', '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_GET));
-        $r->respond('POST', '/customers', $this->setCallbackController($this->controllers['CustomersController'], Http::METHOD_POST));
-        $r->respond('POST', '/users', $this->setCallbackController($this->controllers['UsersController'], Http::METHOD_POST));
-        $r->respond('POST', '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_POST));
+        $r->respond(Http::METHOD_GET, '/', $this->setCallbackController($this->controllers['HomeController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_GET, '/login', $this->setCallbackController($this->controllers['LoginController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_POST, '/login', $this->setCallbackController($this->controllers['LoginController'], Http::METHOD_POST));
+        $r->respond(Http::METHOD_GET, '/logout', $this->setCallbackController($this->controllers['LogoutController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_GET, '/customers', $this->setCallbackController($this->controllers['CustomersController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_GET, '/users', $this->setCallbackController($this->controllers['UsersController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_GET, '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_POST, '/customers', $this->setCallbackController($this->controllers['CustomersController'], Http::METHOD_POST));
+        $r->respond(Http::METHOD_POST, '/users', $this->setCallbackController($this->controllers['UsersController'], Http::METHOD_POST));
+        $r->respond(Http::METHOD_POST, '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_POST));
+        $r->respond(Http::METHOD_GET, '/settings', $this->setCallbackController($this->controllers['SettingController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_POST, '/settings', $this->setCallbackController($this->controllers['SettingController'], Http::METHOD_POST));
     }
 
     private function setCallbackController($obj = null, $method)
     {
         switch ($method) {
-            case 'GET':
+            case Http::METHOD_GET:
                 return [$obj, 'index'];
                 break;
 
-            case 'POST':
+            case Http::METHOD_POST:
                 return [$obj, 'post'];
                 break;
 
-            case 'PUT':
+            case Http::METHOD_PUT:
                 return [$obj, 'put'];
                 break;
 
-            case 'DELETE':
+            case Http::METHOD_DELETE:
                 return [$obj, 'delete'];
                 break;
 
