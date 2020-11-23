@@ -8,11 +8,32 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        Are you sure want to remove?
+                        Are you sure want to remove this?
                     </p>
                     <table class="table">
                         <tr>
-                            <td></td>
+                            <td>CID</td>
+                            <td><input id="removeCid" class="form-control" type="text" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Service Name</td>
+                            <td><input id="removeServiceName" class="form-control" type="text" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Name</td>
+                            <td><input id="removeCustomerName" class="form-control" type="text" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td><input id="removeLocation" class="form-control" type="text" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Rack Location</td>
+                            <td><input id="removeRackLocation" class="form-control" type="text" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Unit Location</td>
+                            <td><input id="removeUnitLocation" class="form-control" type="text" disabled></td>
                         </tr>
                     </table>
                 </div>
@@ -20,7 +41,8 @@
                 <div class="modal-footer justify-content-center align-items-center">
                     <form method="POST" action="/cid?request=remove">
                         <input type="submit" class="btn btn-primary" value="Yes">
-                        <input name="id" id="idValue" type="hidden">
+                        <!-- id is mandatory on remove request -->
+                        <input name="id" id="removeId" type="hidden">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                     </form>
                 </div>

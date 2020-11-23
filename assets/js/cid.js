@@ -18,6 +18,14 @@ $(function() {
         editRackLocation = $('#editRackLocation'),
         editUnitLocation = $('#editUnitLocation');
 
+    let removeId = $('#removeId'),
+        removeCid = $('#removeCid'),
+        removeServiceName = $('#removeServiceName'),
+        removeCustomerName = $('#removeCustomerName'),
+        removeLocation = $('#removeLocation'),
+        removeRackLocation = $('#removeRackLocation'),
+        removeUnitLocation = $('#removeUnitLocation');
+
     viewModal.on('show.bs.modal', function(e) {
         let cid = $(e.relatedTarget).data('cid'),
             serviceName = $(e.relatedTarget).data('service-name'),
@@ -53,6 +61,20 @@ $(function() {
     });
 
     removeModal.on('show.bs.modal', function(e) {
+        let id = $(e.relatedTarget).data('id'),
+            cid = $(e.relatedTarget).data('cid'),
+            serviceName = $(e.relatedTarget).data('service-name'),
+            customerName = $(e.relatedTarget).data('customer-name'),
+            location = $(e.relatedTarget).data('location'),
+            rackLocation = $(e.relatedTarget).data('rack-location'),
+            unitLocation = $(e.relatedTarget).data('u-location');
 
+        removeId.val(id);
+        removeCid.val(cid);
+        removeServiceName.val(serviceName);
+        removeCustomerName.val(customerName);
+        removeLocation.val(location);
+        removeRackLocation.val(rackLocation);
+        removeUnitLocation.val(unitLocation);
     });
 });
