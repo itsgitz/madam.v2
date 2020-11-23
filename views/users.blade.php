@@ -43,6 +43,7 @@
                 </div>
                 <!-- End of search -->
                 <div class="table-responsive">
+                    @if($users)
                     <table class="table table-hover">
                         <th class="text-center">ID</th>
                         <th class="text-center">Name</th>
@@ -66,6 +67,23 @@
                         </tr>
                         @endforeach
                     </table>
+                    @else
+                    <table class="table table-hover">
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Username</th>
+                        <th class="text-center">E-mail</th>
+                        <th class="text-center">Activated</th>
+                        <th class="text-center">Role</th>
+                        <th class="text-center">Created At</th>
+                        <th class="text-center">Action</th>
+                        <tr>
+                            <td class="text-center" colspan="8">
+                                <h4 class="text-secondary">Data not found :(</h4>
+                            </td>
+                        </tr>
+                    </table>
+                    @endif
                 </div>
             </div>
         </div>
