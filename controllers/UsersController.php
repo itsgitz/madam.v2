@@ -118,31 +118,28 @@ class UsersController extends BaseController
     private function editUser($post)
     {
         if (isset($post)) {
-            $validated = $this->userValidateForm($post);
+            $id = isset($post['user_id']) ? $post['user_id'] : '';
 
-            if ($validated['error']) {
-                $this->bind['error_message'] = $validated['message'];
-            } else {
-                $id = isset($post['user_id']) ? $post['user_id'] : '';
+            $param = [
+                'username' => $post['username'],
+                'name' => $post['name'],
+                'user_role' => $post['role'],
+                'email' => $post['email'],
+                'activated' => $post['status']
+            ];
+
+            if (!empty($post['password'])) {
                 $hashedPassword = password_hash($post['password'], PASSWORD_DEFAULT);
+                $param['password'] = $hashedPassword;
+            }
 
-                $param = [
-                    'username' => $post['username'],
-                    'name' => $post['name'],
-                    'password' => $hashedPassword,
-                    'user_role' => $post['role'],
-                    'email' => $post['email'],
-                    'activated' => $post['status']
-                ];
+            $updated = $this->users->updateUser($id, $param);
 
-                $updated = $this->users->updateUser($id, $param);
-
-                if (!$updated) {
-                    $this->bind['error_message'] = 'Something went wrong, cannot updated user data. Please contact administrator.';
-                } else {
-                    header('Location: /users?success=edit_user');
-                    die();
-                }
+            if (!$updated) {
+                $this->bind['error_message'] = 'Something went wrong, cannot updated user data. Please contact administrator.';
+            } else {
+                header('Location: /users?success=edit_user');
+                die();
             }
         }
     }
