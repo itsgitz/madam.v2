@@ -23,11 +23,11 @@
             <div class="col">
                 @include('./layout/messages.html')
 
-                <h3>User Settings</h3>
+                <h3 class="py-4">User Settings</h3>
 
                 @if($user)
-                <div>
-                    <form method="POST" action="/settings">
+                <div class="">
+                    <form method="POST" action="/settings?request=edit">
                         <div class="form-group">
                             <label for="username"><b>Username</b></label>
                             <input id="username" class="form-control" type="text" name="username" value="{!! $user['username'] !!}" placeholder="Your current username: {!! $user['username'] !!}">
@@ -56,7 +56,7 @@
                             </select>
                         </div>
 
-                        <input id="user_id" type="hidden" name="id">
+                        <input id="user_id" type="hidden" name="id" value="{!! $user['id'] !!}">
                         <input class="btn btn-primary form-control" type="submit" value="Save">
                     </form>
                 </div>
