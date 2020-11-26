@@ -127,10 +127,12 @@ class Database
         // sql query for create access_rights table
         $sqlQuery['create_access_rights_table'] = "CREATE TABLE IF NOT EXISTS {$_ENV['ACCESS_RIGHTS_TABLE']} (
             id INT (6) AUTO_INCREMENT PRIMARY KEY,
+            customer_id INT(6) NOT NULL,
             name VARCHAR(64) NOT NULL,
             company_name VARCHAR(64) NOT NULL,
             identity_number VARCHAR(64) NOT NULL,
-            email VARCHAR(64) NOT NULL
+            email VARCHAR(64) NOT NULL,
+            FOREIGN KEY (customer_id) REFERENCES {$_ENV['CUSTOMER_TABLE']}(id)
         )";
 
         // $sqlQuery['create_networking_table'] = "CREATE TABLE IF NOT EXISTS {$_ENV['NETWORKING_TABLE']}
