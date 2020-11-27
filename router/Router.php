@@ -70,10 +70,7 @@ class Router
         $r->respond(Http::METHOD_POST, '/cid', $this->setCallbackController($this->controllers['CIDController'], Http::METHOD_POST));
         $r->respond(Http::METHOD_GET, '/settings', $this->setCallbackController($this->controllers['SettingController'], Http::METHOD_GET));
         $r->respond(Http::METHOD_POST, '/settings', $this->setCallbackController($this->controllers['SettingController'], Http::METHOD_POST));
-        // $r->respond(Http::METHOD_GET, '/access_rights', $this->setCallbackController($this->controllers['AccessRightsController'], Http::METHOD_GET));
-        $r->respond(Http::METHOD_GET, '/access_rights', function() {
-            return "hello";
-        });
+        $r->respond(Http::METHOD_GET, '/access_rights', $this->setCallbackController($this->controllers['AccessRightsController'], Http::METHOD_GET));
     }
 
     private function setCallbackController($obj = null, $method)

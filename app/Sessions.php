@@ -21,14 +21,12 @@ class Sessions
         $userRole,
         $admin
     ) {
-        if (!isset($_SESSION)) {
-            $_SESSION['id'] = $id;
-            $_SESSION['username'] = $username;
-            $_SESSION['name'] = $name;
-            $_SESSION['email'] = $email;
-            $_SESSION['user_role'] = $userRole;
-            $_SESSION['admin'] = $admin;
-        }
+        $_SESSION['id'] = $id;
+        $_SESSION['username'] = $username;
+        $_SESSION['name'] = $name;
+        $_SESSION['email'] = $email;
+        $_SESSION['user_role'] = $userRole;
+        $_SESSION['admin'] = $admin;
     }
 
     public function getSessions()
