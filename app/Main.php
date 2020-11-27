@@ -57,4 +57,9 @@ class App
             ini_set('display_errors', 1);
         }
     }
+
+    private function setMemoryLimit($memoryInMegaByte)
+    {
+        ini_set('memory_limit', $memoryInMegaByte);
+    }
 }

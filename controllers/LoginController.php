@@ -11,9 +11,11 @@ class LoginController extends BaseController
 {
     private $bind;
     private $users;
+    private $sessions;
 
     function __construct()
     {
+        $this->sessions = $this->sessionsInit();
         $this->users = new User();
         $this->bind = [];
         $this->bind['title'] = 'Login to Madam v.2.0';
@@ -46,7 +48,7 @@ class LoginController extends BaseController
 
                     $admin = $this->isAdmin($user['user_role']);
 
-                    $sess->setSessions(
+                    $this->sessions->setSessions(
                         $user['id'],
                         $user['username'],
                         $user['name'],
