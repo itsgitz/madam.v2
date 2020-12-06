@@ -132,6 +132,7 @@ class Database
             company_name VARCHAR(64) NOT NULL,
             identity_number VARCHAR(64) NOT NULL,
             email VARCHAR(64) NOT NULL,
+            status VARCHAR(64) NOT NULL,
             FOREIGN KEY (customer_id) REFERENCES {$_ENV['CUSTOMER_TABLE']}(id)
         )";
 

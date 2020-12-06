@@ -43,9 +43,6 @@ class LoginController extends BaseController
                 if (!password_verify($password, $user['password'])) {
                     $this->bind['error_message'] = 'Username or password is incorrect!';
                 } else {
-                    // set session if password verify
-                    $sess = new Sessions();
-
                     $admin = $this->isAdmin($user['user_role']);
 
                     $this->sessions->setSessions(

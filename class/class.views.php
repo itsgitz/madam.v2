@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Author: anggit.ginanjar@outlook.com <itsgitz.com>
  */
@@ -20,11 +21,15 @@ class Views
         $this->blade = new BladeOne(self::VIEW, self::CACHE, BladeOne::MODE_DEBUG);
     }
 
-    public function run($class, $data = [])
+    public function run($class, $data = [], $sub = false)
     {
-        $name = $this->setFileNamePrefix($class);
-        
-        echo $this->blade->run($name, $data);
+        if (!$sub) {
+            $name = $this->setFileNamePrefix($class);
+
+            echo $this->blade->run($name, $data);
+        } else {
+            echo $this->blade->run($class, $data);
+        }
     }
 
     /**
@@ -44,7 +49,7 @@ class Views
         $strPos     = $fullLen - $endLen;
 
         $fileName = substr($lower, 0, $strPos);
-    
+
         return $fileName;
     }
 }

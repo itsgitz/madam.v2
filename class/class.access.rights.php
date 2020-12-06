@@ -51,6 +51,29 @@ class AccessRights
         }
     }
 
+    public function getAccessRightByCustomerId($customer_id)
+    {
+        $data = [];
+        $stmt = $this->db->getConnection()->prepare("SELECT * FROM {$this->table} WHERE customer_id = ?");
+        $stmt->bind_param('i', $customer_id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row);
+            }
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            $this->db->getConnection()->close();
+
+            return null;
+        }
+    }
+
     public function searchAccessRights($key)
     {
         $data = [];
@@ -83,16 +106,17 @@ class AccessRights
 
     public function addAccessRight($param = [])
     {
-        $stmt = $this->db->getConnection()->prepare("INSERT INTO {$this->table} (customer_id, name, company_name, identity_number, email)
-            VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->db->getConnection()->prepare("INSERT INTO {$this->table} (customer_id, name, company_name, identity_number, email, status)
+            VALUES (?, ?, ?, ?, ?, ?)");
 
         $stmt->bind_param(
-            'issss',
+            'isssss',
             $param['customer_id'],
             $param['name'],
             $param['company_name'],
             $param['identity_number'],
-            $param['email']
+            $param['email'],
+            $param['status']
         );
 
         $success = $stmt->execute();

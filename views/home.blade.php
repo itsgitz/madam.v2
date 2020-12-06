@@ -14,7 +14,7 @@
         <hr />
         <div class="py-4"></div>
         <div class="row row-eq-height justify-content-center align-items-center">
-            <div class="col-xl-3">
+            <div class="col-xl-4 p-2">
                 <a href="/customers">
                     <div class="card bg-danger">
                         <div class="card-header btn">
@@ -26,15 +26,15 @@
                             </h1>
                         </div>
                         <div class="card-footer btn">
-                            <p class="text-light">Show customers list, add a new one, edit the customer data or remove a customer.</p>
+                            <p class="text-light">Show customers list, add a new one, edit or remove a customer.</p>
                         </div>
                     </div>
                 </a>
             </div>
 
-            <div class="p-1"></div>
+            <div class="p-2"></div>
 
-            <div class="col-xl-3">
+            <div class="col-xl-4 p-2">
                 <a href="/cid">
                     <div class="card bg-info">
                         <div class="card-header btn">
@@ -52,10 +52,31 @@
                 </a>
             </div>
 
-            <div class="p-1"></div>
+            <div class="p-2"></div>
+
+            <div class="col-xl-4 p-2">
+                <a href="/access_rights">
+                    <div class="card bg-secondary">
+                        <div class="card-header btn">
+                            <h3 class="text-light">Access Rights</h3>
+                        </div>
+
+                        <div class="card-body btn">
+                            <h1 class="display-1">
+                                <i class="fas fa-key text-light"></i>
+                            </h1>
+                        </div>
+                        <div class="card-footer btn">
+                            <p class="text-light">Show Access Rights list.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="p-2"></div>
 
             @if($admin)
-            <div class="col-xl-3">
+            <div class="col-xl-4 p-2">
                 <a href="/users">
                     <div class="card bg-warning">
                         <div class="card-header btn">
@@ -73,7 +94,7 @@
                 </a>
             </div>
             @endif
-            <div class="p-1"></div>
+            <div class="p-2"></div>
         </div>
     </div>
     @include('./layout/footer.html')

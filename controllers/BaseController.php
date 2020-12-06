@@ -17,10 +17,10 @@ class BaseController
 
     }
 
-    protected function setView($class, $data = [])
+    protected function setView($class, $data = [], $sub = false)
     {
         $v = new Views();
-        $v->run($class, $data);
+        $v->run($class, $data, $sub);
     }
 
     protected function isAdmin($userRole)

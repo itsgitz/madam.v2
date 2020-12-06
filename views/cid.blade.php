@@ -32,12 +32,14 @@
                         </form>
                     </div>
                     <div class="col-6">
+                        @if($admin)
                         <div class="float-right">
                             <button class="btn btn-info" style="border-radius: 20px;" data-toggle="modal" data-target="#addModal">
                                 <i class="fas fa-plus"></i>
                                 Add CID
                             </button>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <!-- End of search -->

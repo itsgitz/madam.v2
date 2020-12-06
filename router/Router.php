@@ -71,6 +71,7 @@ class Router
         $r->respond(Http::METHOD_GET, '/settings', $this->setCallbackController($this->controllers['SettingController'], Http::METHOD_GET));
         $r->respond(Http::METHOD_POST, '/settings', $this->setCallbackController($this->controllers['SettingController'], Http::METHOD_POST));
         $r->respond(Http::METHOD_GET, '/access_rights', $this->setCallbackController($this->controllers['AccessRightsController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_POST, '/access_rights', $this->setCallbackController($this->controllers['AccessRightsController'], Http::METHOD_POST));
     }
 
     private function setCallbackController($obj = null, $method)

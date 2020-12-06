@@ -6,8 +6,11 @@ namespace Madam;
 class CustomersController extends BaseController
 {
     const SUCCESS_ADD_CUSTOMER = 'add_customer';
+    const SUCCESS_ADD_ACCESS_RIGHT = 'add_access_right';
     const SUCCESS_REMOVE_CUSTOMER = 'remove_customer';
+    const SUCCESS_REMOVE_ACCESS_RIGHT = 'remove_access_right';
     const SUCCESS_EDIT_CUSTOMER = 'edit_customer';
+    const SUCCESS_EDIT_ACCESS_RIGHT = 'edit_access_right';
 
     private $bind = [];
     private $customers;
@@ -47,6 +50,18 @@ class CustomersController extends BaseController
 
                 case self::SUCCESS_REMOVE_CUSTOMER: // remove customer
                     $this->bind['success_message'] = 'Successfully removed customer!';
+                    break;
+
+                case self::SUCCESS_ADD_ACCESS_RIGHT:
+                    $this->bind['success_message'] = 'Successfully created access right for the customer!';
+                    break;
+
+                case self::SUCCESS_EDIT_ACCESS_RIGHT:
+                    $this->bind['success_message'] = 'Successfully updated access right for the customer!';
+                    break;
+
+                case self::SUCCESS_REMOVE_ACCESS_RIGHT:
+                    $this->bind['success_message'] = 'Successfully removed access right for the customer!';
                     break;
             }
         }

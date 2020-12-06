@@ -35,12 +35,14 @@
                         </form>
                     </div>
                     <div class="col-6">
+                        @if($admin)
                         <div class="float-right">
                             <button class="btn btn-info" style="border-radius: 20px;" data-toggle="modal" data-target="#addModal">
                                 <i class="fas fa-plus"></i>
                                 Add Customer
                             </button>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <!-- End of search -->
@@ -61,7 +63,7 @@
                             <td class="text-center">{{$c['sales_name']}}</td>
                             <td class="text-center">{{$c['segmentation']}}</td>
                             <td class="text-center">{{$c['created_at']}}</td>
-                            <td class="text-center"><button id="viewBtn" class="btn btn-info" data-toggle="modal" data-target="#viewModal" data-customer-id="{!! $c['id'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-sales-name="{!! $c['sales_name'] !!}" data-segmentation="{!! $c['segmentation'] !!}"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
+                            <td class="text-center"><button id="viewBtn" class="btn btn-info" data-toggle="modal" data-target="#viewModal" data-customer-id="{!! $c['id'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-sales-name="{!! $c['sales_name'] !!}" data-segmentation="{!! $c['segmentation'] !!}" data-is-admin="{{$admin}}"><span class="small"><i class="fas fa-eye"></i> View</span></button></td>
                             @if($admin)
                             <td class="text-center">
                                 <button id="editBtn" class="btn btn-warning text-light" data-toggle="modal" data-target="#editModal" data-customer-id="{!! $c['id'] !!}" data-customer-name="{!! $c['customer_name'] !!}" data-sales-name="{!! $c['sales_name'] !!}" data-segmentation="{!! $c['segmentation'] !!}"><span class="small"><i class="fas fa-edit"></i> Edit</span></button>
