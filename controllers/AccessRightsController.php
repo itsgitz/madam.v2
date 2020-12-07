@@ -77,7 +77,7 @@ class AccessRightsController extends BaseController
                         break;
 
                     case Http::EDIT_REQUEST:
-                        $this->editAccessRightsProccess($_POST);
+                        $this->editAccessRightsProccess($_GET, $_POST);
                         break;
 
                     case Http::REMOVE_REQUEST:
@@ -170,8 +170,35 @@ class AccessRightsController extends BaseController
         $this->setView(self::EDIT_ACCESS_RIGHTS_VIEW, $this->bind, self::SUB_PAGE);
     }
 
-    private function editAccessRightsProccess($post)
+    private function editAccessRightsProccess($get, $post)
     {
+        if (!empty($get['id'])) {
+            $id             = isset($get['id']) ? $get['id'] : '';
+            $customer_id    = isset($post['customer_id']) ? $post['customer_id'] : '';
+            $name           = isset($post['name']) ? $post['name'] : '';
+            $companyName    = isset($post['company_name']) ? $post['company_name'] : '';
+            $identityNumber = isset($post['identity_number']) ? $post['identity_number'] : '';
+            $email          = isset($post['email']) ? $post['email'] : '';
+            $status         = isset($post['status']) ? $post['status'] : '';
+
+            $param = [
+                'customer_id' => $customer_id,
+                'name' => $name,
+                'company_name' => $companyName,
+                'identity_number' => $identityNumber,
+                'email' => $email,
+                'status' => $status
+            ];
+
+            $updated = $this->accessRights->updateAccessRight($id, $param);
+
+            if (!$updated) {
+                $this->bind['error_message'] = 'Something went wrong, cannot updated the access rights. Please contact the administrator!';
+            } else {
+                header('Location: /customers?success=edit_access_right');
+                die();
+            }
+        }
     }
 
     private function removeAccessRightsView($get)
