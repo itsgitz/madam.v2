@@ -83,7 +83,7 @@ class AccessRights
             name LIKE ? OR
             company_name LIKE ? OR
             identity_number LIKE ? OR
-            email LIKE ? OR");
+            email LIKE ?");
 
         $stmt->bind_param('ssss', $keyFormat, $keyFormat, $keyFormat, $keyFormat);
         $stmt->execute();

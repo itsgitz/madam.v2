@@ -46,11 +46,12 @@ $(function () {
         viewSalesName.val(salesName);
         viewSegmentation.val(segmentation);
 
-        let accessRightsUrl = 'http://' + window.location.host + '/access_rights?customer_id=' + customerId + '&request_type=json';
+        let accessRightsUrl = 'http://' + window.location.host + '/access_rights?customer_id=' + customerId + '&request_type=json&action=api';
         console.warn(accessRightsUrl);
 
         let accessRightsAddHref = 'http://' + window.location.host + '/access_rights?customer_id=' + customerId + '&action=add';
 
+        console.warn('send request to:', accessRightsUrl);
         $.get(accessRightsUrl, function (data) {
             console.warn(data);
             console.warn(data.length);

@@ -17,6 +17,7 @@ class Http
     const REMOVE_REQUEST = 'remove';
     const EDIT_REQUEST = 'edit';
     const SEARCH_REQUEST = 'search';
+    const API_REQUEST = 'api';
     const JSON = 'json';
     const CONTENT_TYPE_JSON = 'Content-Type: application/json';
 }

@@ -32,7 +32,7 @@ class AccessRightsController extends BaseController
 
     public function index()
     {
-        if (!empty($_GET)) {
+        if (!empty($_GET['action'])) {
             switch ($_GET['action']) {
                 case Http::ADD_REQUEST:
                     $this->addAccessRightsView($_GET);
@@ -46,14 +46,17 @@ class AccessRightsController extends BaseController
                     $this->removeAccessRightsView($_GET);
                     break;
 
-                default:
+                case Http::API_REQUEST:
                     $this->apiGetAccessRightByCustomerId($_GET);
                     break;
-            }
-        } else {
 
-            $this->setView(__CLASS__, $this->bind);
+                default:
+                    header('Location: /access_rights');
+                    die();
+            }
         }
+
+        $this->setView(__CLASS__, $this->bind);
     }
 
     /**
@@ -70,7 +73,7 @@ class AccessRightsController extends BaseController
     public function post()
     {
         if (isset($_POST)) {
-            if (!empty($_GET)) {
+            if (!empty($_GET['action'])) {
                 switch ($_GET['action']) {
                     case Http::ADD_REQUEST:
                         $this->addAccessRightsProcess($_GET, $_POST);
@@ -84,6 +87,14 @@ class AccessRightsController extends BaseController
                         $this->removeAccessRightsProcess($_GET);
                         break;
                 }
+            } else if (!empty($_GET['request'])) {
+                switch ($_GET['request']) {
+                    case Http::SEARCH_REQUEST:
+                        $this->searchAccessRights($_POST);
+                        break;
+                }
+
+                $this->setView(__CLASS__, $this->bind);
             }
         }
     }
@@ -222,6 +233,21 @@ class AccessRightsController extends BaseController
             } else {
                 header('Location: /customers?success=remove_access_right');
                 die();
+            }
+        }
+    }
+
+    private function searchAccessRights($post)
+    {
+        if (isset($post)) {
+            $key = isset($post['key']) ? $post['key'] : '';
+
+            $result = $this->accessRights->searchAccessRights($key);
+
+            if (isset($result)) {
+                $this->bind['access_rights'] = $result;
+            } else {
+                $this->bind['error_message'] = 'Result not found :(';
             }
         }
     }

@@ -21,7 +21,7 @@
                 <!-- Search -->
                 <div class="row py-3">
                     <div class="col-6">
-                        <form method="POST" action="/cid?request=search">
+                        <form method="POST" action="/access_rights?request=search">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-search"></i></span>
