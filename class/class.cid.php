@@ -61,10 +61,18 @@ class CID
             service_name LIKE ? OR
             customer_name LIKE ? OR
             location LIKE ? OR
-            rack_location ? OR
-            u_location ? OR");
+            rack_location LIKE ? OR
+            u_location LIKE ?");
 
-        $stmt->bind_param('ssssss', $keyFormat, $keyFormat, $keyFormat, $keyFormat, $keyFormat, $keyFormat);
+        $stmt->bind_param('ssssss', 
+            $keyFormat,
+            $keyFormat,
+            $keyFormat,
+            $keyFormat,
+            $keyFormat,
+            $keyFormat
+        );
+
         $stmt->execute();
 
         $result = $stmt->get_result();
