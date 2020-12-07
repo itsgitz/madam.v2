@@ -43,6 +43,7 @@
                             <option value="Not Approved">Not Approved</option>
                         </select>
                     </div>
+                    <input type="hidden" name="customer_id" value="{!! $access_rights['customer_id'] !!}">
                     <input class="btn btn-warning form-control text-white" type="submit" value="Save">
                 </form>
             </div>

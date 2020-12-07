@@ -41,7 +41,7 @@
                         <label for="status"><b>Status</b></label>
                         <select id="status" class="custom-select" name="status" required>
                             <option value="Approved">Approved</option>
-                            <option value="Not Apptoved">Not Approved</option>
+                            <option value="Not Approved">Not Approved</option>
                         </select>
                     </div>
                     <input class="btn btn-primary form-control" type="submit" value="Add">
