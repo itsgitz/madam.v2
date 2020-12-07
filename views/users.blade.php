@@ -23,13 +23,13 @@
                 <!-- Search -->
                 <div class="row py-3">
                     <div class="col-6">
-                        <form method="POST" action="/users?request=search">
+                        <!-- <form method="POST" action="/users?request=search">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                                 </div>
                                 <input type="search" name="key" class="form-control" placeholder="Search users ...">
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                     <div class="col-6">
