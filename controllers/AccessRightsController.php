@@ -140,6 +140,7 @@ class AccessRightsController extends BaseController
         $this->bind['customer_name'] = $getCustomerData['customer_name'];
 
         $this->setView(self::ADD_ACCESS_RIGHTS_VIEW, $this->bind, self::SUB_PAGE);
+        die();
     }
 
     private function addAccessRightsProcess($get, $post)
@@ -179,6 +180,7 @@ class AccessRightsController extends BaseController
 
         $this->bind['access_rights'] = $getAccessRights;
         $this->setView(self::EDIT_ACCESS_RIGHTS_VIEW, $this->bind, self::SUB_PAGE);
+        die();
     }
 
     private function editAccessRightsProccess($get, $post)
@@ -219,6 +221,7 @@ class AccessRightsController extends BaseController
 
         $this->bind['access_rights'] = $getAccessRights;
         $this->setView(self::REMOVE_ACCESS_RIGHTS_VIEW, $this->bind, self::SUB_PAGE);
+        die();
     }
 
     private function removeAccessRightsProcess($get)

@@ -26,7 +26,8 @@
                     </div>
                     <div class="form-group">
                         <label for="companyName"><b>Company Name</b></label>
-                        <input id="companyName" class="form-control" type="text" name="company_name" value="{!! $access_rights['company_name'] !!}" disabled>
+                        <input id="companyName" class="form-control" type="text" value="{!! $access_rights['company_name'] !!}" disabled>
+                        <input type="hidden" name="company_name" value="{!! $access_rights['company_name'] !!}">
                     </div>
                     <div class="form-group">
                         <label for="identityNumber"><b>Identity Number (KTP/Passport/KITAS)</b></label>
