@@ -75,6 +75,27 @@
 
             <div class="p-2"></div>
 
+            <div class="col-xl-4 p-2">
+                <a href="/vlan">
+                    <div class="card bg-success">
+                        <div class="card-header btn">
+                            <h3 class="text-light">VLAN Management</h3>
+                        </div>
+
+                        <div class="card-body btn">
+                            <h1 class="display-1">
+                                <i class="fas fa-ethernet text-light"></i>
+                            </h1>
+                        </div>
+                        <div class="card-footer btn">
+                            <p class="text-light">Show VLAN list.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="p-2"></div>
+
             @if($admin)
             <div class="col-xl-4 p-2">
                 <a href="/users">
