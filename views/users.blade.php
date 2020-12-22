@@ -30,7 +30,7 @@
                                 </div>
                                 <input type="search" name="key" class="form-control" placeholder="Search users ...">
                             </div> -->
-                        </form>
+                        <!-- </form> -->
                     </div>
                     <div class="col-6">
                         <div class="float-right">

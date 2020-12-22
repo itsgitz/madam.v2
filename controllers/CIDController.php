@@ -57,19 +57,19 @@ class CIDController extends BaseController
         switch ($requestParam) {
             case Http::ADD_REQUEST:
                 $this->addCID($_POST);
-            break;
+                break;
 
             case Http::REMOVE_REQUEST:
                 $this->removeCID($_POST);
-            break;
+                break;
 
             case Http::EDIT_REQUEST:
                 $this->editCID($_POST);
-            break;
+                break;
 
             case Http::SEARCH_REQUEST:
                 $this->searchCID($_POST);
-            break;
+                break;
         }
 
         $this->setView(__CLASS__, $this->bind);
@@ -170,7 +170,7 @@ class CIDController extends BaseController
             }
         }
     }
-    
+
     public function cidValidateForm($param = [])
     {
         if (!isset($param)) {

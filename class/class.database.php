@@ -57,7 +57,7 @@ class Database
             $_ENV['USER_TABLE'],
             $_ENV['CID_TABLE'],
             $_ENV['ACCESS_RIGHTS_TABLE'],
-            // $_ENV['NETWORKING_TABLE']
+            $_ENV['NETWORKING_TABLE']
         ];
 
         $num = count($tables);
@@ -136,8 +136,13 @@ class Database
             FOREIGN KEY (customer_id) REFERENCES {$_ENV['CUSTOMER_TABLE']}(id)
         )";
 
-        // $sqlQuery['create_networking_table'] = "CREATE TABLE IF NOT EXISTS {$_ENV['NETWORKING_TABLE']}
-        //     ";
+        $sqlQuery['create_networking_table'] = "CREATE TABLE IF NOT EXISTS {$_ENV['NETWORKING_TABLE']} (
+            id INT(6) AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(64) NOT NULL,
+            site VARCHAR(64) NOT NULL,
+            slug VARCHAR(64) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )";
 
         // run migrations queries
         foreach ($sqlQuery as $q) {

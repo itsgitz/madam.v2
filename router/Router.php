@@ -51,6 +51,7 @@ class Router
             'CIDController' => new CIDController(),
             'SettingController' => new SettingController(),
             'AccessRightsController' => new AccessRightsController(),
+            'VlanController' => new VlanController()
         ];
     }
 
@@ -72,6 +73,8 @@ class Router
         $r->respond(Http::METHOD_POST, '/settings', $this->setCallbackController($this->controllers['SettingController'], Http::METHOD_POST));
         $r->respond(Http::METHOD_GET, '/access_rights', $this->setCallbackController($this->controllers['AccessRightsController'], Http::METHOD_GET));
         $r->respond(Http::METHOD_POST, '/access_rights', $this->setCallbackController($this->controllers['AccessRightsController'], Http::METHOD_POST));
+        $r->respond(Http::METHOD_GET, '/vlan', $this->setCallbackController($this->controllers['VlanController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_POST, '/vlan', $this->setCallbackController($this->controllers['VlanController'], Http::METHOD_POST));
     }
 
     private function setCallbackController($obj = null, $method)

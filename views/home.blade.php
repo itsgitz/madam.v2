@@ -15,6 +15,25 @@
         <div class="py-4"></div>
         <div class="row row-eq-height justify-content-center align-items-center">
             <div class="col-xl-4 p-2">
+                <a href="/dashboard">
+                    <div class="card bg-danger">
+                        <div class="card-header btn">
+                            <h3 class="text-light">Dashboard</h3>
+                        </div>
+                        <div class="card-body btn">
+                            <h1 class="display-1">
+                                <i class="fas fa-tachometer-alt text-light"></i>
+                            </h1>
+                        </div>
+                        <div class="card-footer btn">
+                            <p class="text-light">Show customers data in Graph or Chart.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="p-2"></div>
+            <div class="col-xl-4 p-2">
                 <a href="/customers">
                     <div class="card bg-danger">
                         <div class="card-header btn">
