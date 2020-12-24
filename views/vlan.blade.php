@@ -47,8 +47,8 @@
                             <td class="text-center">{{$v['name']}}</td>
                             <td class="text-center">{{$v['site']}}</td>
                             <td class="text-center">{{$v['slug']}}</td>
-                            <td class="text-center"><button id="editBtn" class="btn btn-warning text-light" data-toggle="modal" data-target="#editModal"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
-                            <td class="text-center"><button id="removeBtn" class="btn btn-danger" data-toggle="modal" data-target="#removeModal"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
+                            <td class="text-center"><button id="editBtn" class="btn btn-warning text-light" data-toggle="modal" data-target="#editModal" data-id="{!! $v['id'] !!}" data-name="{!! $v['name'] !!}" data-site="{!! $v['site'] !!}"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
+                            <td class="text-center"><button id="removeBtn" class="btn btn-danger" data-toggle="modal" data-target="#removeModal" data-id="{!! $v['id'] !!}" data-name="{!! $v['name'] !!}" data-site="{!! $v['site'] !!}"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
                         </tr>
                         @endforeach
                     </table>
@@ -72,6 +72,7 @@
     </div>
 
     @include('./modals/networking/vlangroup/vlangroup.add.html')
+    @include('./modals/networking/vlangroup/vlangroup.remove.html')
 </body>
 
 </html>
