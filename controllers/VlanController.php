@@ -74,14 +74,54 @@ class VlanController extends BaseController
 
     private function addVlanGroup($post)
     {
+        if (isset($post)) {
+            $param = [
+                'name' => $post['name'],
+                'site' => $post['site'],
+            ];
+
+            $param['slug'] = \strtolower($param['name']);
+
+            $created = $this->networking->addVlanGroup($param);
+
+            if (!$created) {
+                $this->bind['error_message'] = 'Something went wrong, cannot created new VLAN Group';
+            } else {
+                $h = 'Location: /vlan?success=' . self::SUCCESS_ADD_VLAN_GROUP;
+
+                \header($h);
+                die();
+            }
+        }
     }
 
     private function removeVlanGroup($post)
     {
+        if (isset($post)) {
+            $id = isset($post['id']) ? $post['id'] : '';
+
+            $removed = $this->networking->removeVlanGroup($id);
+
+            if (!$removed) {
+                $this->bind['error_message'] = 'Something went wrong, cannot removed VLAN Group';
+            } else {
+                $h = 'Location: /vlan?success=' . self::SUCCESS_REMOVE_VLAN_GROUP;
+
+                \header($h);
+                die();
+            }
+        }
     }
 
     private function editVlanGroup($post)
     {
+        if (isset($post)) {
+            $id = isset($post['id']) ? $post['id'] : '';
+
+            $param = [
+                ''
+            ];
+        }
     }
 
     private function searchVlanGroup($post)
