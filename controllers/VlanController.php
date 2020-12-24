@@ -119,8 +119,23 @@ class VlanController extends BaseController
             $id = isset($post['id']) ? $post['id'] : '';
 
             $param = [
-                ''
+                'id' => $id,
+                'name' => $post['name'],
+                'site' => $post['site']
             ];
+
+            $param['slug'] = \strtolower($param['name']);
+
+            $updated = $this->networking->updateVlanGroup($id, $param);
+
+            if (!$updated) {
+                $this->bind['error_message'] = 'Something went wrong, cannot updated VLAN Group';
+            } else {
+                $h = 'Location: /vlan?success=' . self::SUCCESS_EDIT_VLAN_GROUP;
+
+                \header($h);
+                die();
+            }
         }
     }
 

@@ -8,9 +8,14 @@
             <div class="modal-body">
                 <form method="POST" action="/vlan?request=edit">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input id="name" class="form-control" type="text" name="name" required>
+                        <label for="vlanGroupNameEdit">Name</label>
+                        <input id="vlanGroupNameEdit" class="form-control" type="text" name="name">
                     </div>
+                    <div class="form-group">
+                        <label for="vlanGroupSiteEdit">Site</label>
+                        <input id="vlanGroupSiteEdit" class="form-control" type="text" name="site">
+                    </div>
+                    <input id="vlanGroupIdEdit" type="hidden" name="id">
                     <input type="submit" class="form-control btn btn-primary" value="Create">
                 </form>
             </div>

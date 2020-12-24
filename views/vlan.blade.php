@@ -72,6 +72,7 @@
     </div>
 
     @include('./modals/networking/vlangroup/vlangroup.add.html')
+    @include('./modals/networking/vlangroup/vlangroup.edit.html')
     @include('./modals/networking/vlangroup/vlangroup.remove.html')
 </body>
 
