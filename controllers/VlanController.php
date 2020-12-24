@@ -70,28 +70,44 @@ class VlanController extends BaseController
                 $this->searchVlanGroup($_POST);
                 break;
         }
+
+        $this->setView(__CLASS__, $this->bind);
     }
 
     private function addVlanGroup($post)
     {
         if (isset($post)) {
-            $param = [
-                'name' => \strtoupper($post['name']),
-                'site' => $post['site'],
-            ];
+            if (!$this->isWhiteSpace($post['name'])) {
 
-            $param['slug'] = \strtolower($param['name']);
+                $param = [
+                    'name' => \strtoupper($post['name']),
+                    'site' => $post['site'],
+                ];
 
-            $created = $this->networking->addVlanGroup($param);
+                $param['slug'] = \strtolower($param['name']);
 
-            if (!$created) {
-                $this->bind['error_message'] = 'Something went wrong, cannot created new VLAN Group';
+                $created = $this->networking->addVlanGroup($param);
+
+                if (!$created) {
+                    $this->bind['error_message'] = 'Something went wrong, cannot created new VLAN Group';
+                } else {
+                    $h = 'Location: /vlan?success=' . self::SUCCESS_ADD_VLAN_GROUP;
+
+                    \header($h);
+                    die();
+                }
             } else {
-                $h = 'Location: /vlan?success=' . self::SUCCESS_ADD_VLAN_GROUP;
-
-                \header($h);
-                die();
+                $this->bind['error_message'] = "Cannot created new VLAN Group. Make sure the VLAN Group's name has no whitespace.";
             }
+        }
+    }
+
+    private function isWhiteSpace($s)
+    {
+        if (!preg_match('/\s/', $s)) {
+            return false;
+        } else {
+            return true;
         }
     }
 
