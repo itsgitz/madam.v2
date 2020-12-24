@@ -76,7 +76,7 @@ class VlanController extends BaseController
     {
         if (isset($post)) {
             $param = [
-                'name' => $post['name'],
+                'name' => \strtoupper($post['name']),
                 'site' => $post['site'],
             ];
 
@@ -120,7 +120,7 @@ class VlanController extends BaseController
 
             $param = [
                 'id' => $id,
-                'name' => $post['name'],
+                'name' => \strtoupper($post['name']),
                 'site' => $post['site']
             ];
 

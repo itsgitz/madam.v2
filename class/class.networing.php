@@ -98,15 +98,25 @@ class Networking
 
             return false;
         } else {
-            $this->db->getConnection()->close();
+            // create new table based on vlan group name
+            $newSubVlanTableName = \strtolower($param['name']);
+            $createdNewTable = $this->createVlanSubTable($newSubVlanTableName);
 
-            return true;
+            if (!$createdNewTable) {
+                $this->db->getConnection()->close();
+
+                return false;
+            } else {
+                $this->db->getConnection()->close();
+
+                return true;
+            }
         }
     }
 
     public function createVlanSubTable($vlanName)
     {
-        $query = "CREATE TABLE {$vlanName} (
+        $query = "CREATE TABLE `{$vlanName}` (
             id INT(6) AUTO_INCREMENT PRIMARY KEY,
             group_id INT(6) NOT NULL,
             prefixes VARCHAR(64) NOT NULL,
@@ -128,7 +138,7 @@ class Networking
 
     public function dropVlanSubTable($vlanName)
     {
-        $query = "DROP TABLE {$vlanName}";
+        $query = "DROP TABLE `$vlanName`";
 
         if ($this->db->getConnection()->query($query) === TRUE) {
             $this->db->getConnection()->close();
@@ -180,7 +190,8 @@ class Networking
     {
         $stmt = $this->db->getConnection()->prepare("INSERT INTO {$vlanName} (group_id, prefixes, tenant, status, role, description)
             VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('isssss', 
+        $stmt->bind_param(
+            'isssss',
             $param['group_id'],
             $param['prefixes'],
             $param['tenant'],
@@ -241,6 +252,9 @@ class Networking
 
     public function removeVlanGroup($id)
     {
+        // get name first for remove sub vlan table name
+        $subVlan = $this->getVlanGroupById($id);
+
         $stmt = $this->db->getConnection()->prepare("DELETE FROM {$this->table} WHERE id = ?");
         $stmt->bind_param('i', $id);
 
@@ -251,9 +265,17 @@ class Networking
 
             return false;
         } else {
-            $this->db->getConnection()->close();
+            $removeSubVlanTable = $this->dropVlanSubTable($subVlan['slug']);
 
-            return true;
+            if (!$removeSubVlanTable) {
+                $this->db->getConnection()->close();
+
+                return false;
+            } else {
+                $this->db->getConnection()->close();
+
+                return true;
+            }
         }
     }
 }
