@@ -118,6 +118,10 @@ class VlanController extends BaseController
         if (isset($post)) {
             $id = isset($post['id']) ? $post['id'] : '';
 
+            if (!empty($post['name'])) {
+                $oldSubVlanTableData = $this->networking->getVlanGroupById($id);
+            }
+
             $param = [
                 'id' => $id,
                 'name' => \strtoupper($post['name']),
@@ -131,10 +135,16 @@ class VlanController extends BaseController
             if (!$updated) {
                 $this->bind['error_message'] = 'Something went wrong, cannot updated VLAN Group';
             } else {
-                $h = 'Location: /vlan?success=' . self::SUCCESS_EDIT_VLAN_GROUP;
+                $renamed = $this->networking->renameSubVlanTable($oldSubVlanTableData['slug'], $param['slug']);
 
-                \header($h);
-                die();
+                if (!$renamed) {
+                    $this->bind['error_message'] = 'Something went wrong, cannot updated VLAN Group';
+                } else {
+                    $h = 'Location: /vlan?success=' . self::SUCCESS_EDIT_VLAN_GROUP;
+
+                    \header($h);
+                    die();
+                }
             }
         }
     }

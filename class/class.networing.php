@@ -99,7 +99,7 @@ class Networking
             return false;
         } else {
             // create new table based on vlan group name
-            $newSubVlanTableName = \strtolower($param['name']);
+            $newSubVlanTableName = $param['slug'];
             $createdNewTable = $this->createVlanSubTable($newSubVlanTableName);
 
             if (!$createdNewTable) {
@@ -145,6 +145,21 @@ class Networking
             return true;
         } else {
             $this->db->getConnection()->close();
+            return false;
+        }
+    }
+
+    public function renameSubVlanTable($from, $to)
+    {
+        $query = "RENAME TABLE `$from` TO `$to`";
+
+        if ($this->db->getConnection()->query($query) === TRUE) {
+            $this->db->getConnection()->close();
+
+            return true;
+        } else {
+            $this->db->getConnection()->close();
+
             return false;
         }
     }
