@@ -26,7 +26,7 @@
                     <!-- Total customers -->
                     <div class="col">
                         <div class="card bg-warning text-light">
-                            <div class="card-body">
+                            <div class="card-body" data-toggle="tooltip" title="Customers">
                                 <div class="row">
                                     <div class="col-2">
                                         <i class="fas fa-money-check display-3"></i>
@@ -45,7 +45,7 @@
                     <!-- Total cids -->
                     <div class="col">
                         <div class="card bg-danger text-light">
-                            <div class="card-body">
+                            <div class="card-body" data-toggle="tooltip" title="CID">
                                 <div class="row">
                                     <div class="col-2">
                                         <i class="fas fa-money-check display-3"></i>

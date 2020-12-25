@@ -1,7 +1,7 @@
 $(function () {
+    $('[data-toggle="tooltip"]').tooltip(); 
 
     fetchCustomerSegmentationsData();
-
 });
 
 function fetchCustomerSegmentationsData() {
