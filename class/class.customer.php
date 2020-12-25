@@ -38,6 +38,45 @@ class Customer
         }
     }
 
+    public function getCustomersTotal()
+    {
+        $total = \count($this->getCustomers());
+
+        return $total;
+    }
+
+    public function getCustomerSegmentations()
+    {
+        $data = [];
+        $query = "SELECT DISTINCT `segmentation` FROM {$this->table} ORDER BY `segmentation` ASC";
+        $result = $this->db->getConnection()->query($query);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row['segmentation']);
+            }
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            return null;
+        }
+    }
+
+    public function getCustomerSegmentationTotal($segmentation)
+    {
+        $query = "SELECT * FROM `{$this->table}` WHERE `segmentation` = '{$segmentation}'";
+        $result = $this->db->getConnection()->query($query);
+
+        if ($result->num_rows > 0) {
+            $this->db->getConnection()->close();
+
+            return $result->num_rows;
+        } else {
+            return null;
+        }
+    }
+
     public function getCustomerById($id)
     {
         $stmt = $this->db->getConnection()->prepare("SELECT * FROM {$this->table} WHERE id = ?");
