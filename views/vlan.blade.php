@@ -40,13 +40,14 @@
                         <th class="text-center">Name</th>
                         <th class="text-center">Site</th>
                         <th class="text-center">Slug</th>
-                        <th class="text-center" colspan="2">Actions</th>
+                        <th class="text-center" colspan="3">Actions</th>
                         @foreach($vlanGroups as $v)
                         <tr>
                             <td class="text-center">{{$v['id']}}</td>
                             <td class="text-center">{{$v['name']}}</td>
                             <td class="text-center">{{$v['site']}}</td>
                             <td class="text-center">{{$v['slug']}}</td>
+                            <td class="text-center"><a class="btn btn-success" href="/vlan_site?id={!! $v['id'] !!}&view={!! $v['slug'] !!}">View</a></td>
                             <td class="text-center"><button id="editBtn" class="btn btn-warning text-light" data-toggle="modal" data-target="#editModal" data-id="{!! $v['id'] !!}" data-name="{!! $v['name'] !!}" data-site="{!! $v['site'] !!}"><span class="small"><i class="fas fa-edit"></i> Edit</span></button></td>
                             <td class="text-center"><button id="removeBtn" class="btn btn-danger" data-toggle="modal" data-target="#removeModal" data-id="{!! $v['id'] !!}" data-name="{!! $v['name'] !!}" data-site="{!! $v['site'] !!}"><span class="small"><i class="fas fa-trash"></i> Remove</span></button></td>
                         </tr>
