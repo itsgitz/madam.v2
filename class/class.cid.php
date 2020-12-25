@@ -31,6 +31,13 @@ class CID
         }
     }
 
+    public function getCIDsTotal()
+    {
+        $total = count($this->getCIDs());
+
+        return $total;
+    }
+
     public function getCIDById($id)
     {
         $stmt = $this->db->getConnection()->prepare("SELECT * FROM {$this->table} WHERE id = ?");
