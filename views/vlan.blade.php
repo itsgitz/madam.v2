@@ -7,7 +7,7 @@
     <script src="/assets/js/networking.js"></script>
 </head>
 
-<body class="d-flex flex-column min-hv-100">
+<body class="d-flex flex-column min-vh-100">
     @include('./layout/navigation.html')
     <div class="container-fluid py-5">
         <p class="bg-success p-4 text-light" style="border-radius: 3px;">
@@ -27,7 +27,7 @@
                         <div class="float-right">
                             <button class="btn btn-info" style="border-radius: 20px;" data-toggle="modal" data-target="#addModal">
                                 <i class="fas fa-plus"></i>
-                                Add Vlan Group
+                                Add VLAN Group
                             </button>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         <th class="text-center">Site</th>
                         <th class="text-center">Slug</th>
                         <th class="text-center">Actions</th>
-                        <tr>
+                        <tr class="text-center">
                             <td class="text-center" colspan="5">
                                 <h4 class="text-secondary">Data not found :(</h4>
                             </td>
@@ -75,6 +75,7 @@
     @include('./modals/networking/vlangroup/vlangroup.add.html')
     @include('./modals/networking/vlangroup/vlangroup.edit.html')
     @include('./modals/networking/vlangroup/vlangroup.remove.html')
+    @include('./layout/footer.html')
 </body>
 
 </html>
