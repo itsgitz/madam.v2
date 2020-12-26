@@ -25,20 +25,24 @@
                 <div class="row">
                     <!-- Total customers -->
                     <div class="col-sm-6 py-3">
-                        <div class="card bg-warning text-light">
-                            <div class="card-body" data-toggle="tooltip" title="Customers">
-                                <h3><i class="fas fa-money-check"></i> Total Customers: {{$total_customers}}</h3>
+                        <a href="/customers">
+                            <div class="card bg-warning text-light">
+                                <div class="card-body" data-toggle="tooltip" title="Customers">
+                                    <h3><i class="fas fa-money-check"></i> Total Customers: {{$total_customers}}</h3>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Total cids -->
                     <div class="col-sm-6 py-3">
-                        <div class="card bg-danger text-light">
-                            <div class="card-body" data-toggle="tooltip" title="CID">
-                            <h3><i class="fas fa-money-check"></i> Total CID: {{$total_cid}}</h3>
+                        <a href="/cid">
+                            <div class="card bg-danger text-light">
+                                <div class="card-body" data-toggle="tooltip" title="CID">
+                                    <h3><i class="fas fa-money-check"></i> Total CID: {{$total_cid}}</h3>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="py-5"></div>
@@ -58,12 +62,6 @@
                         @endif
                     </div>
                     <div class="col-sm-6">
-                        <!-- <div class="chart-container" style="position: relative; margin: auto; height: 80vh; width: 80vw;">
-                            <canvas id="customerSegmentationChart"></canvas>
-                        </div> -->
-                        <!-- <div class="chart-container" style="width: 600; height: 250;">
-                            <canvas id="customerSegmentationChart"></canvas>
-                        </div> -->
                         <canvas id="customerSegmentationChart" class="my-4 chartjs-render-monitor" width="500" height="500" style="display: block; width: 500px; height: 500px;"></canvas>
                     </div>
                 </div>
