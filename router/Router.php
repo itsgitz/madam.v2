@@ -52,7 +52,8 @@ class Router
             'SettingController' => new SettingController(),
             'AccessRightsController' => new AccessRightsController(),
             'VlanController' => new VlanController(),
-            'DashboardController' => new DashboardController()
+            'DashboardController' => new DashboardController(),
+            'VlanSiteController' => new VlanSiteController(),
         ];
     }
 
@@ -77,6 +78,8 @@ class Router
         $r->respond(Http::METHOD_GET, '/vlan', $this->setCallbackController($this->controllers['VlanController'], Http::METHOD_GET));
         $r->respond(Http::METHOD_POST, '/vlan', $this->setCallbackController($this->controllers['VlanController'], Http::METHOD_POST));
         $r->respond(Http::METHOD_GET, '/dashboard', $this->setCallbackController($this->controllers['DashboardController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_GET, '/vlan_site', $this->setCallbackController($this->controllers['VlanSiteController'], Http::METHOD_GET));
+        $r->respond(Http::METHOD_POST, '/vlan_site', $this->setCallbackController($this->controllers['VlanSiteController'], Http::METHOD_POST));
     }
 
     private function setCallbackController($obj = null, $method)
