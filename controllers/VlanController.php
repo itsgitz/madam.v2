@@ -17,7 +17,7 @@ class VlanController extends BaseController
         $this->sessions = $this->sessionsInit()->getSessions();
         $this->networking = new Networking();
         $this->bind = [
-            'title' => 'VLAN Management - Madam v.2.0',
+            'title' => 'VLAN Group Management - Madam v.2.0',
             'name' => $this->sessions['name'],
             'admin' => $this->sessions['admin'],
             'vlanGroups' => $this->networking->getVlanGroups(),
