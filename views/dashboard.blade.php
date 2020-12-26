@@ -24,46 +24,26 @@
                 <div class="py-4"></div>
                 <div class="row">
                     <!-- Total customers -->
-                    <div class="col">
+                    <div class="col-sm-6 py-3">
                         <div class="card bg-warning text-light">
                             <div class="card-body" data-toggle="tooltip" title="Customers">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <i class="fas fa-money-check display-3"></i>
-                                    </div>
-                                    <div class="col-4">
-                                        <h4 class="card-title"><strong>Total Customers:</strong></h4>
-                                        <div class="card-text">
-                                            <h4><strong>{{$total_customers}}</strong></h4>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3><i class="fas fa-money-check"></i> Total Customers: {{$total_customers}}</h3>
                             </div>
                         </div>
                     </div>
 
                     <!-- Total cids -->
-                    <div class="col">
+                    <div class="col-sm-6 py-3">
                         <div class="card bg-danger text-light">
                             <div class="card-body" data-toggle="tooltip" title="CID">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <i class="fas fa-money-check display-3"></i>
-                                    </div>
-                                    <div class="col-4">
-                                        <h4 class="card-title"><strong>Total CID</strong></h4>
-                                        <div class="card-text">
-                                            <h4><strong>{{$total_cid}}</strong></h4>
-                                        </div>
-                                    </div>
-                                </div>
+                            <h3><i class="fas fa-money-check"></i> Total CID: {{$total_cid}}</h3>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="py-5"></div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-sm-4">
                         @if($segmentations)
                         <table id="segmentation-table" class="table table-striped table-sm table-hover">
                             <th>Name</th>
@@ -77,10 +57,14 @@
                         </table>
                         @endif
                     </div>
-                    <div class="col">
-                        <div class="chart-container" style="position: relative; height: 50vh; width: 50vw">
+                    <div class="col-sm-6">
+                        <!-- <div class="chart-container" style="position: relative; margin: auto; height: 80vh; width: 80vw;">
                             <canvas id="customerSegmentationChart"></canvas>
-                        </div>
+                        </div> -->
+                        <!-- <div class="chart-container" style="width: 600; height: 250;">
+                            <canvas id="customerSegmentationChart"></canvas>
+                        </div> -->
+                        <canvas id="customerSegmentationChart" class="my-4 chartjs-render-monitor" width="500" height="500" style="display: block; width: 500px; height: 500px;"></canvas>
                     </div>
                 </div>
             </div>
