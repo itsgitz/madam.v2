@@ -33,6 +33,8 @@ class Networking
 
             return $data;
         } else {
+            $this->db->getConnection()->close();
+            
             return null;
         }
     }
@@ -118,6 +120,7 @@ class Networking
     {
         $query = "CREATE TABLE `{$vlanName}` (
             id INT(6) AUTO_INCREMENT PRIMARY KEY,
+            vlan_id VARCHAR(16) NOT NULL,
             group_id INT(6) NOT NULL,
             prefixes VARCHAR(64) NOT NULL,
             tenant VARCHAR(64) NOT NULL,
@@ -161,70 +164,6 @@ class Networking
             $this->db->getConnection()->close();
 
             return false;
-        }
-    }
-
-    public function updateVlanSubTable($id, $vlanName, $param = [])
-    {
-        $set = '';
-        $argV = [];
-        $types = '';
-
-        foreach ($param as $k => $v) {
-            $set .= "$k = ?, ";
-            $types .= 's';
-
-            array_push($argV, $v);
-        }
-
-        array_push($argV, $id);
-
-        $types .= 'i';
-
-        $update = rtrim($set, ', ');
-
-        $stmt = $this->db->getConnection()->prepare("UPDATE {$vlanName}
-            SET $update
-            WHERE id = ?");
-
-        $stmt->bind_param($types, ...$argV);
-        $success = $stmt->execute();
-
-        if (!$success) {
-            $this->db->getConnection()->close();
-
-            return false;
-        } else {
-            $this->db->getConnection()->close();
-
-            return true;
-        }
-    }
-
-    public function addVlanSubTable($vlanName, $param = [])
-    {
-        $stmt = $this->db->getConnection()->prepare("INSERT INTO {$vlanName} (group_id, prefixes, tenant, status, role, description)
-            VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param(
-            'isssss',
-            $param['group_id'],
-            $param['prefixes'],
-            $param['tenant'],
-            $param['status'],
-            $param['role'],
-            $param['description']
-        );
-
-        $success = $stmt->execute();
-
-        if (!$success) {
-            $this->db->getConnection()->close();
-
-            return false;
-        } else {
-            $this->db->getConnection()->close();
-
-            return true;
         }
     }
 
@@ -291,6 +230,110 @@ class Networking
 
                 return true;
             }
+        }
+    }
+
+    public function removeVlanSubTableData($vlanName, $id)
+    {
+        $stmt = $this->db->getConnection()->prepare("DELETE FROM `$vlanName` WHERE id = ?");
+        $stmt->bind_param('i', $id);
+
+        $success = $stmt->execute();
+
+        if (!$success) {
+            $this->db->getConnection()->close();
+
+            return false;
+        } else {
+            $this->db->getConnection()->close();
+
+            return true;
+        }
+    }
+
+    public function getVlanSubTableData($vlanName)
+    {
+        $data = [];
+        $query = "SELECT * FROM `$vlanName`";
+        $result = $this->db->getConnection()->query($query);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row);
+            }
+
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            $this->db->getConnection()->close();
+
+            return null;
+        }
+    }
+
+    public function updateVlanSubTableData($id, $vlanName, $param = [])
+    {
+        $set = '';
+        $argV = [];
+        $types = '';
+
+        foreach ($param as $k => $v) {
+            $set .= "$k = ?, ";
+            $types .= 's';
+
+            array_push($argV, $v);
+        }
+
+        array_push($argV, $id);
+
+        $types .= 'i';
+
+        $update = rtrim($set, ', ');
+
+        $stmt = $this->db->getConnection()->prepare("UPDATE {$vlanName}
+            SET $update
+            WHERE id = ?");
+
+        $stmt->bind_param($types, ...$argV);
+        $success = $stmt->execute();
+
+        if (!$success) {
+            $this->db->getConnection()->close();
+
+            return false;
+        } else {
+            $this->db->getConnection()->close();
+
+            return true;
+        }
+    }
+
+    public function addVlanSubTableData($vlanName, $param = [])
+    {
+        $stmt = $this->db->getConnection()->prepare("INSERT INTO {$vlanName} (vlan_id, group_id, prefixes, tenant, status, role, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param(
+            'sisssss',
+            $param['vlan_id'],
+            $param['group_id'],
+            $param['prefixes'],
+            $param['tenant'],
+            $param['status'],
+            $param['role'],
+            $param['description']
+        );
+
+        $success = $stmt->execute();
+
+        if (!$success) {
+            $this->db->getConnection()->close();
+
+            return false;
+        } else {
+            $this->db->getConnection()->close();
+
+            return true;
         }
     }
 }
