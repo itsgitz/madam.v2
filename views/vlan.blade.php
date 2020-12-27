@@ -36,14 +36,14 @@
                 <div class="table-responsive">
                     @if($vlanGroups)
                     <table class="table table-hover">
-                        <th class="text-center">ID</th>
+                        <!-- <th class="text-center">ID</th> -->
                         <th class="text-center">Name</th>
                         <th class="text-center">Site</th>
                         <th class="text-center">Slug</th>
                         <th class="text-center" colspan="3">Actions</th>
                         @foreach($vlanGroups as $v)
                         <tr>
-                            <td class="text-center">{{$v['id']}}</td>
+                            <!-- <td class="text-center">{{$v['id']}}</td> -->
                             <td class="text-center">{{$v['name']}}</td>
                             <td class="text-center">{{$v['site']}}</td>
                             <td class="text-center">{{$v['slug']}}</td>
@@ -55,7 +55,7 @@
                     </table>
                     @else
                     <table class="table table-hover">
-                        <th class="text-center">ID</th>
+                        <!-- <th class="text-center">ID</th> -->
                         <th class="text-center">Name</th>
                         <th class="text-center">Site</th>
                         <th class="text-center">Slug</th>
