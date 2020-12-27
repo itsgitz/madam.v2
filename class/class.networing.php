@@ -6,6 +6,7 @@
 
 namespace Madam;
 
+use Exception;
 
 class Networking
 {
@@ -34,7 +35,7 @@ class Networking
             return $data;
         } else {
             $this->db->getConnection()->close();
-            
+
             return null;
         }
     }
@@ -136,6 +137,33 @@ class Networking
         } else {
             $this->db->getConnection()->close();
             return false;
+        }
+    }
+
+    public function searchVlanSubTableData($vlanName, $key)
+    {
+        $data = [];
+        $keyFormat = "%" . $key . "%";
+
+        $stmt = $this->db->getConnection()->prepare("SELECT * FROM `$vlanName` WHERE
+            vlan_id LIKE ? OR prefixes LIKE ? OR tenant LIKE ? OR status LIKE ? OR role LIKE ? OR description LIKE ?");
+
+        $stmt->bind_param('ssssss', $keyFormat, $keyFormat, $keyFormat, $keyFormat, $keyFormat, $keyFormat);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row);
+            }
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            $this->db->getConnection()->close();
+
+            return null;
         }
     }
 
@@ -311,10 +339,13 @@ class Networking
 
     public function addVlanSubTableData($vlanName, $param = [])
     {
-        $stmt = $this->db->getConnection()->prepare("INSERT INTO {$vlanName} (vlan_id, group_id, prefixes, tenant, status, role, description)
-            VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $query = "INSERT INTO `$vlanName` (vlan_id, group_id, prefixes, tenant, status, role, description)
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $this->db->getConnection()->prepare($query);
+
         $stmt->bind_param(
-            'sisssss',
+            'sssssss',
             $param['vlan_id'],
             $param['group_id'],
             $param['prefixes'],
