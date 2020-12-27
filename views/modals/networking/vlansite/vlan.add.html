@@ -1,0 +1,57 @@
+<div id="addModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add VLAN</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="/vlan_site?request=add&id={!! $vlan_group_id !!}&vlan_name={!! $vlan_group_name !!}">
+                    <div class="form-group">
+                        <label for="vlanid">VLAN ID</label>
+                        <input id="vlanid" class="form-control" type="text" name="vlan_id"
+                            placeholder="Enter the VLAN ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prefixes">Subnet Prefixes</label>
+                        <input id="prefixes" class="form-control" type="text" name="prefixes"
+                            placeholder="Enter the subnet prefixes ..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tenant">Tenant</label>
+                        <input id="tenant" class="form-control" type="text" name="tenant"
+                            placeholder="Enter the Tenant name ..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <input id="status" class="form-control" type="text" name="status"
+                            placeholder="Enter the status of VLAN" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <input id="role" class="form-control" type="text" name="role"
+                            placeholder="Enter the role of VLAN ..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descriptipn">Description</label>
+                        <input id="description" class="form-control" type="text" name="description"
+                            placeholder="Enter the description ..." required>
+                    </div>
+                    <input type="hidden" value="{!! $vlan_group_id !!}" name="group_id">
+                    <input type="submit" class="form-control btn btn-primary" value="Create">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-ban"></i>
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>
