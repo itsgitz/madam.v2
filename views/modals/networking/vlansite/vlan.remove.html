@@ -1,0 +1,39 @@
+<div class="modal" id="removeVlanModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Remove VLAN</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    Are you sure want to remove <strong><span class="text-info" id="vlanVlanId"></span></strong>,
+                    Prefixes: <strong>
+                        <span id="vlanPrefixes" class="text-info"></span>
+                    </strong>,
+
+                    Tenant: <strong>
+                        <span id="vlanTenant" class="text-info"></span>
+                    </strong>
+
+                    Status: <strong>
+                        <span id="vlanStatus" class="text-info"></span>
+                    </strong>
+
+                    Role: <strong>
+                        <span id="vlanRole" class="text-info"></span>
+                    </strong>
+                </p>
+            </div>
+
+            <div class="modal-footer justify-content-center align-items-center">
+                <form method="POST" action="/vlan_site?request=remove&id={!! $vlan_group_id !!}&vlan_name={!! $vlan_group_name !!}">
+                    <input id="vlanId" type="hidden" name="id">
+                    <input type="submit" class="btn btn-primary" value="Yes">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
