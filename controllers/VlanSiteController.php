@@ -27,6 +27,7 @@ class VlanSiteController extends BaseController
             'admin' => $this->sessions['admin'],
             'vlan_group_name' => $this->vlanGroupName,
             'vlan_group_id' => $this->vlanGroupId,
+            'vlan_group_name_title' => \strtoupper($this->vlanGroupName),
             'success_message' => '',
             'error_message' => '',
         ];
@@ -129,10 +130,43 @@ class VlanSiteController extends BaseController
 
     private function removeVlan($post)
     {
+        if (isset($post)) {
+            $id = isset($post['id']) ? $post['id'] : '';
+
+            $removed = $this->networking->removeVlanSubTableData($this->vlanGroupName, $id);
+
+            if (!$removed) {
+                $this->bind['error_message'] = 'Something went wrong, cannot removed VLAN. Please contact the administrator.';
+            } else {
+                $h = 'Location: /vlan_site?success=' . self::SUCCESS_REMOVE_VLAN_SITE . '&id=' . $this->vlanGroupId . '&vlan_name=' . $this->vlanGroupName;
+
+                \header($h);
+                die();
+            }
+        }   
     }
 
     private function editVlan($post)
     {
+        $id = isset($post['id']) ? $post['id'] : '';
+        $param = [
+            'vlan_id' => $post['vlan_id'],
+            'prefixes' => $post['prefixes'],
+            'tenant' => $post['tenant'],
+            'status' => $post['status'],
+            'role' => $post['role'],
+            'description' => $post['description']
+        ];
+
+        $updated = $this->networking->updateVlanSubTableData($id, $this->vlanGroupName, $param);
+
+        if (!$updated) {
+            $this->bind['error_message'] = 'Something went wrong, cannot updated VLAN';
+        } else {
+            $h = 'Location: /vlan_site?success=' . self::SUCCESS_EDIT_VLAN_SITE . '&id=' . $this->vlanGroupId . '&vlan_name=' . $this->vlanGroupName;
+            \header($h);
+            die();
+        }
     }
 
     private function searchVlan($post)
