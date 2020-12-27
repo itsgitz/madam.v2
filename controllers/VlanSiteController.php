@@ -86,7 +86,7 @@ class VlanSiteController extends BaseController
             }
 
 
-            $this->setVlanData();
+            // $this->setVlanData();
         } else {
             $this->bind['error_message'] = 'Invalid request! VLAN Group Name and ID cannot be empty!';
         }
@@ -171,5 +171,18 @@ class VlanSiteController extends BaseController
 
     private function searchVlan($post)
     {
+        if (isset($post)) {
+            $key = isset($post['key']) ? $post['key'] : '';
+
+            $result = $this->networking->searchVlanSubTableData($this->vlanGroupName, $key);
+
+            if (isset($result)) {
+                $this->bind['vlan'] = $result;
+            } else {
+                $this->bind['error_message'] = 'Result not found :(';
+            }
+
+            $this->bind['search'] = true;
+        }
     }
 }

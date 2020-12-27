@@ -27,9 +27,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                                 </div>
-                                <input type="search" name="key" class="form-control" placeholder="Search cid ...">
+                                <input type="search" name="key" class="form-control" placeholder="Search CID ...">
                             </div>
                         </form>
+
+                        @if($search)
+                        <div>
+                            <a href="/cid">View All Data</a>
+                        </div>
+                        @endif
                     </div>
                     <div class="col-6">
                         @if($admin)

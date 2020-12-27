@@ -33,6 +33,12 @@
                                 <input type="search" name="key" class="form-control" placeholder="Search customers ...">
                             </div>
                         </form>
+
+                        @if($search)
+                        <div>
+                            <a href="/customers">View All Data</a>
+                        </div>
+                        @endif
                     </div>
                     <div class="col-6">
                         @if($admin)

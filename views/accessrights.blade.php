@@ -29,6 +29,12 @@
                                 <input type="search" name="key" class="form-control" placeholder="Search access rights ...">
                             </div>
                         </form>
+
+                        @if($search)
+                        <div>
+                            <a href="/access_rights">View All Data</a>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <!-- End of search -->

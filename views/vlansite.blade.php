@@ -29,6 +29,12 @@
                                 <input type="search" name="key" class="form-control" placeholder="Search VLAN ...">
                             </div>
                         </form>
+
+                        @if($search)
+                        <div>
+                            <a href="/vlan_site?id={!! $vlan_group_id !!}&vlan_name={!! $vlan_group_name !!}">View All Data</a>
+                        </div>
+                        @endif
                     </div>
                     <div class="col-6">
                         <div class="float-right">

@@ -168,6 +168,8 @@ class CIDController extends BaseController
             } else {
                 $this->bind['error_message'] = 'Result not found :(';
             }
+
+            $this->bind['search'] = true;
         }
     }
 
