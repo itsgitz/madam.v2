@@ -1,0 +1,47 @@
+<div class="modal" id="editVlanModal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit VLAN</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="/vlan_site?request=edit&id={!! $vlan_group_id !!}&vlan_name={!! $vlan_group_name !!}">
+                    <div class="form-group">
+                        <label for="vlanVlanIdEdit">VLAN ID</label>
+                        <input id="vlanVlanIdEdit" class="form-control" type="text" name="vlan_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="vlanPrefixesEdit">Prefixes</label>
+                        <input id="vlanPrefixesEdit" class="form-control" type="text" name="prefixes">
+                    </div>
+                    <div class="form-group">
+                        <label for="vlanTenantEdit">Tenant</label>
+                        <input id="vlanTenantEdit" class="form-control" type="text" name="tenant">
+                    </div>
+                    <div class="form-group">
+                        <label for="vlanStatusEdit">Status</label>
+                        <input id="vlanStatusEdit" class="form-control" type="text" name="status">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vlanRoleEdit">Role</label>
+                        <input id="vlanRoleEdit" class="form-control" type="text" name="role">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vlanDescriptionEdit">Description</label>
+                        <input id="vlanDescriptionEdit" class="form-control" type="text" name="description">
+                    </div>
+                    <input id="vlanIdEdit" type="hidden" name="id">
+                    <input type="submit" class="form-control btn btn-primary" value="Save">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-ban"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
