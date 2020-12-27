@@ -33,6 +33,26 @@
 
                 <div class="table-responsive">
                     @if($vlan)
+                    <table class="table table-hover">
+                        <th class="text-center">VLAN ID</th>
+                        <th class="text-center">Prefixes</th>
+                        <th class="text-center">Tenant</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Role</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center" colspan="2">Action</th>
+                        @foreach($vlan as $v)
+                        <tr>
+                            <td class="text-center">{{$v['vlan_id']}}</td>
+                            <td class="text-center">{{$v['prefixes']}}</td>
+                            <td class="text-center">{{$v['tenant']}}</td>
+                            <td class="text-center">{{$v['role']}}</td>
+                            <td class="text-center">{{$v['description']}}</td>
+                            <td class="text-center"><button class="btn btn-warning text-light"><i class="fas fa-pencil"></i> Edit</button></td>
+                            <td class="text-center"><button class="btn btn-danger text-light"><i class="fas fa-trash"></i> Remove</button></td>
+                        </tr>
+                        @endforeach
+                    </table>
                     @else
                     <table class="table table-hover">
                         <th class="text-center">VLAN ID</th>
@@ -54,6 +74,7 @@
         </div>
     </div>
 
+    @include('./modals/networking/vlansite/vlan.add.html')
     @include('./layout/footer.html')
 </body>
 
