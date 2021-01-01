@@ -50,6 +50,14 @@ class AccessRightsController extends BaseController
                     $this->apiGetAccessRightByCustomerId($_GET);
                     break;
 
+                case Http::EXPORT_TO_EXCEL:
+                    $this->actionExportToExcel();
+                    break;
+
+                case Http::EXPORT_TO_PDF:
+                    $this->actionExportToPDF();
+                    break;
+
                 default:
                     header('Location: /access_rights');
                     die();
@@ -255,5 +263,48 @@ class AccessRightsController extends BaseController
 
             $this->bind['search'] = true;
         }
+    }
+
+    private function actionExportToExcel()
+    {
+        $accessRights = $this->accessRights->getAccessRights();
+
+        if (!empty($accessRights)) {
+            $this->exportToExcel($accessRights);
+        } else {
+            $this->bind['error_message'] = 'Cannot exported empty data!';
+        }
+    }
+
+    private function actionExportToPDF()
+    {
+    }
+
+    private function exportToExcel($data = [])
+    {
+        $filename = 'Access Rights - ' . date('d-m-Y') . ' (Madam v.2.0).xlsx';
+
+        // set header
+        \header(Http::CONTENT_TYPE_EXCEL);
+        \header('Content-Disposition: attachment; filename=' . $filename);
+
+        $heading = false;
+
+        if (isset($data)) {
+            foreach ($data as $d) {
+                if (!$heading) {
+                    echo \implode("\t", \array_keys($d)) . "\n";
+                    $heading = true;
+                }
+
+                echo \implode("\t", \array_values($d)) . "\n";
+            }
+
+            exit();
+        }
+    }
+
+    private function exportToPDF()
+    {
     }
 }

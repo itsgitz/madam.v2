@@ -14,6 +14,7 @@ class CustomersController extends BaseController
 
     private $bind = [];
     private $customers;
+    private $accessRights;
     private $sessions;
 
     function __construct()
@@ -27,6 +28,7 @@ class CustomersController extends BaseController
         ];
 
         $this->customers = new Customer();
+        $this->accessRights = new AccessRights();
         $this->bind['customers'] = $this->customers->getCustomers();
         $this->bind['success_message'] = '';
         $this->bind['error_message'] = '';
@@ -36,6 +38,7 @@ class CustomersController extends BaseController
     {
         if (isset($_GET)) {
             $successParam = isset($_GET['success']) ? $_GET['success'] : '';
+            $actionParam = isset($_GET['action']) ? $_GET['action'] : '';
 
             switch ($successParam) {
 
@@ -63,6 +66,14 @@ class CustomersController extends BaseController
                 case self::SUCCESS_REMOVE_ACCESS_RIGHT:
                     $this->bind['success_message'] = 'Successfully removed access right for the customer!';
                     break;
+            }
+
+            if (!empty($actionParam)) {
+                switch ($actionParam) {
+                    case Http::EXPORT_TO_EXCEL:
+                        $this->actionExportToExcel($_GET);
+                        break;
+                }
             }
         }
 
@@ -237,6 +248,44 @@ class CustomersController extends BaseController
                 'error' => false,
                 'message' => null
             ];
+        }
+    }
+
+    private function actionExportToExcel($get)
+    {
+        $customer_id = isset($get['customer_id']) ? $get['customer_id'] : '';
+
+        $accessRights = $this->accessRights->getAccessRightByCustomerId($customer_id);
+
+        if (!empty($accessRights)) {
+            $this->exportToExcel($accessRights);
+        } else {
+            $this->bind['error_message'] = 'Cannot exported empty data!';
+        }
+    }
+
+    private function exportToExcel($data = [])
+    {
+        $ext = 'xlsx';
+        $companyName = $data[0]['company_name'];
+        $filename = 'Access Rights - ' . $companyName . ' (Madam v.2.0).' . $ext;
+
+        \header(Http::CONTENT_TYPE_EXCEL);
+        \header('Content-Disposition: attachment; filename=' . $filename);
+
+        $heading = false;
+
+        if (isset($data)) {
+            foreach ($data as $d) {
+                if (!$heading) {
+                    echo \implode("\t", \array_keys($d)) . "\n";
+                    $heading = true;
+                }
+
+                echo \implode("\t", \array_values($d)) . "\n";
+            }
+
+            exit();
         }
     }
 }

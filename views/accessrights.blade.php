@@ -36,22 +36,34 @@
                         </div>
                         @endif
                     </div>
+
+                    <div class="col-6">
+                        <div class="float-right">
+                            <a class="btn btn-success" href="?action=export_to_excel"><i class="fas fa-file-export"></i> Export to Excel</a>
+                            <a class="btn btn-danger" href="?action=export_to_pdf"><i class="fas fa-file-export"></i> Export to PDF</a>
+                        </div>
+
+                    </div>
                 </div>
                 <!-- End of search -->
+
+                <div class="py-2 text-secondary">
+                    <p><i><b>*Note</b>: export functions on this page only used for exports all data. Please use export feature from <a href="/customers">Customers</a> menu for export the specific data.</i></p>
+                </div>
 
                 <div class="table-responsive">
                     @if($access_rights)
                     <table class="table table-hover">
-                        <th class="text-center">ID</th>
-                        <th class="text-center">Customer ID</th>
+                        <!-- <th class="text-center">ID</th>
+                        <th class="text-center">Customer ID</th> -->
                         <th class="text-center">Name</th>
                         <th class="text-center">Company Name</th>
                         <th class="text-center">Identity Number</th>
                         <th class="text-center">E-mail Address</th>
                         @foreach($access_rights as $ac)
                         <tr>
-                            <td class="text-center">{{$ac['id']}}</td>
-                            <td class="text-center">{{$ac['customer_id']}}</td>
+                            <!-- <td class="text-center">{{$ac['id']}}</td>
+                            <td class="text-center">{{$ac['customer_id']}}</td> -->
                             <td class="text-center">{{$ac['name']}}</td>
                             <td class="text-center">{{$ac['company_name']}}</td>
                             <td class="text-center">{{$ac['identity_number']}}</td>
@@ -68,7 +80,9 @@
                         <th class="text-center">Identity Number</th>
                         <th class="text-center">E-mail Address</th>
                         <tr>
-                            <td class="text-center" colspan="6"><h4 class="text-secondary">Data not found :(</h4></td>
+                            <td class="text-center" colspan="6">
+                                <h4 class="text-secondary">Data not found :(</h4>
+                            </td>
                         </tr>
                     </table>
                     @endif

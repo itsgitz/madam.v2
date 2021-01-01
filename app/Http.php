@@ -20,4 +20,7 @@ class Http
     const API_REQUEST = 'api';
     const JSON = 'json';
     const CONTENT_TYPE_JSON = 'Content-Type: application/json';
+    const CONTENT_TYPE_EXCEL = 'Content-Type: application/vnd.ms-excel';
+    const EXPORT_TO_EXCEL = 'export_to_excel';
+    const EXPORT_TO_PDF = 'export_to_pdf';
 }
