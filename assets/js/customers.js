@@ -25,6 +25,8 @@ $(function () {
 
     let accessRightsTable = $('#accessRightsTable');
     let accessRightsAddLink = $('#accessRightsAddLink');
+    let exportToExcel = $('#exportToExcel');
+    let exportToPdf = $('#exportToPdf');
 
     /**
      * View modal on click
@@ -50,6 +52,7 @@ $(function () {
         console.warn(accessRightsUrl);
 
         let accessRightsAddHref = 'http://' + window.location.host + '/access_rights?customer_id=' + customerId + '&action=add';
+        let accessRightsExportToExcelHref = 'http://' + window.location.host + '/customers?customer_id=' + customerId + '&action=export_to_excel';
 
         console.warn('send request to:', accessRightsUrl);
         $.get(accessRightsUrl, function (data) {
@@ -118,6 +121,7 @@ $(function () {
         });
 
         accessRightsAddLink.attr('href', accessRightsAddHref);
+        exportToExcel.attr('href', accessRightsExportToExcelHref);
     });
 
     /**

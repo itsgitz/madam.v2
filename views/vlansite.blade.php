@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <h4 class="text-secondary py-4"><strong>{{$vlan_group_name_title}}</strong></h4>
+                    <h4 class="text-secondary py-1"><strong>{{$vlan_group_name_title}}</strong></h4>
                     @if($vlan)
                     <table class="table table-hover">
                         <th class="text-center">VLAN ID</th>
@@ -56,7 +56,9 @@
                         <th class="text-center">Status</th>
                         <th class="text-center">Role</th>
                         <th class="text-center">Description</th>
+                        @if($admin)
                         <th class="text-center" colspan="2">Action</th>
+                        @endif
                         @foreach($vlan as $v)
                         <tr>
                             <td class="text-center">{{$v['vlan_id']}}</td>
@@ -65,9 +67,12 @@
                             <td class="text-center"><span class="bg-primary text-light p-2" style="border-radius: 1px;"><strong>{{$v['status']}}</strong></span></td>
                             <td class="text-center">{{$v['role']}}</td>
                             <td class="text-center">{{$v['description']}}</td>
+
+                            @if($admin)
                             <td class="text-center"><button class="btn btn-warning text-light" data-toggle="modal" data-target="#editVlanModal" data-id="{!! $v['id'] !!}" data-vlan-id="{!! $v['vlan_id'] !!}" data-prefixes="{!! $v['prefixes'] !!}" data-tenant="{!! $v['tenant'] !!}" data-status="{!! $v['status'] !!}" data-role="{!! $v['role'] !!}" data-description="{!! $v['description'] !!}"><i class="fas fa-edit"></i> Edit</button></td>
                             <td class="text-center">
                                 <button class="btn btn-danger text-light" data-toggle="modal" data-target="#removeVlanModal" data-id="{!! $v['id'] !!}" data-vlan-id="{!! $v['vlan_id'] !!}" data-prefixes="{!! $v['prefixes'] !!}" data-tenant="{!! $v['tenant'] !!}" data-status="{!! $v['status'] !!}" data-role="{!! $v['role'] !!}" data-description="{!! $v['description'] !!}"><i class="fas fa-trash"></i> Remove</button></td>
+                            @endif
                         </tr>
                         @endforeach
                     </table>
