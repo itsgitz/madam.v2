@@ -53,6 +53,7 @@ $(function () {
 
         let accessRightsAddHref = 'http://' + window.location.host + '/access_rights?customer_id=' + customerId + '&action=add';
         let accessRightsExportToExcelHref = 'http://' + window.location.host + '/customers?customer_id=' + customerId + '&action=export_to_excel';
+        let accessRightsExportToExcelPdf = 'http://' + window.location.host + '/customers?customer_id=' + customerId + '&action=export_to_pdf';
 
         console.warn('send request to:', accessRightsUrl);
         $.get(accessRightsUrl, function (data) {
@@ -122,6 +123,7 @@ $(function () {
 
         accessRightsAddLink.attr('href', accessRightsAddHref);
         exportToExcel.attr('href', accessRightsExportToExcelHref);
+        exportToPdf.attr('href', accessRightsExportToExcelPdf)
     });
 
     /**

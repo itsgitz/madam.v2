@@ -73,6 +73,10 @@ class CustomersController extends BaseController
                     case Http::EXPORT_TO_EXCEL:
                         $this->actionExportToExcel($_GET);
                         break;
+
+                    case Http::EXPORT_TO_PDF:
+                        $this->actionExportToPdf($_GET);
+                        break;
                 }
             }
         }
@@ -260,7 +264,21 @@ class CustomersController extends BaseController
         if (!empty($accessRights)) {
             $this->exportToExcel($accessRights);
         } else {
-            $this->bind['error_message'] = 'Cannot exported empty data!';
+            $this->bind['error_message'] = 'Cannot exported empty data to Excel format!';
+        }
+    }
+
+    private function actionExportToPdf($get)
+    {
+        $customer_id = isset($get['customer_id']) ? $get['customer_id'] : '';
+        $columns = $this->accessRights->getColumns();
+
+        $accessRights = $this->accessRights->getAccessRightsByCustomerIdForExport($customer_id);
+
+        if (!empty($accessRights)) {
+            $this->exportToPDF($accessRights, $columns);
+        } else {
+            $this->bind['error_message'] = 'Cannot exported empty data to PDF format!';
         }
     }
 
@@ -287,5 +305,54 @@ class CustomersController extends BaseController
 
             exit();
         }
+    }
+
+    private function exportToPDF($data = [], $header = [])
+    {
+        $displayHeading = [
+            'name' => 'Name',
+            'company_name' => 'Company Name',
+            'identity_number' => 'Identity Number',
+            'email' => 'E-mail Address',
+            'status' => 'Status'
+        ];
+
+        \array_splice($header, 0, 2);
+
+        $pdf = new PDFController();
+        $headerTitle = 'Access Rights for ' . $data[0]['company_name'];
+        $pdf->setHeaderTitle($headerTitle);
+
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+        $pdf->SetFont('Arial', 'B', 9);
+
+        $width = 0;
+
+        foreach ($header as $h) {
+            if ($h['COLUMN_NAME'] == 'status') {
+                $width = 30;
+            } else {
+                $width = 40;
+            }
+
+            $pdf->Cell($width, 10, $displayHeading[$h['COLUMN_NAME']], 1);
+        }
+
+        foreach ($data as $d) {
+            $pdf->Ln();
+
+            foreach ($d as $k => $col) {
+                if ($k == 'status') {
+                    $width = 30;
+                } else {
+                    $width = 40;
+                }
+
+                $pdf->Cell($width, 10, $col, 1);
+            }
+        }
+
+        $pdf->Output();
     }
 }
