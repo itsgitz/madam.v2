@@ -31,8 +31,73 @@ class AccessRights
         }
     }
 
+    public function getAccessRightsForExport()
+    {
+        $data = [];
+        $query = "SELECT `name`, `company_name`, `identity_number`, `email`, `status`  FROM {$this->table}";
+
+        $result = $this->db->getConnection()->query($query);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row);
+            }
+
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            return null;
+        }
+    }
+
+    public function getAccessRightsByCustomerIdForExport($id)
+    {
+        $data = [];
+        $stmt = $this->db->getConnection()->prepare("SELECT `name`, `company_name`, `identity_number`, `email`, `status` FROM {$this->table} WHERE customer_id = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row);
+            }
+
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            $this->db->getConnection()->close();
+
+            return null;
+        }
+    }
+
+    public function getColumns()
+    {
+        $data = [];
+
+        $query = "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`='{$this->table}'";
+        $result = $this->db->getConnection()->query($query);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row);
+            }
+
+            $this->db->getConnection()->close();
+
+            return $data;
+        } else {
+            return null;
+        }
+    }
+
     public function getAccessRightById($id)
     {
+        $data = [];
         $stmt = $this->db->getConnection()->prepare("SELECT * FROM {$this->table} WHERE id = ?");
         $stmt->bind_param('i', $id);
         $stmt->execute();
@@ -40,7 +105,10 @@ class AccessRights
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $data = $result->fetch_assoc();
+            while ($row = $result->fetch_assoc()) {
+                \array_push($data, $row);
+            }
+
             $this->db->getConnection()->close();
 
             return $data;

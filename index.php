@@ -5,6 +5,7 @@
  */
 
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/vendor/fpdf/fpdf.php';
 
 use Madam\App;
 
