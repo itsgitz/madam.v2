@@ -259,7 +259,7 @@ class CustomersController extends BaseController
     {
         $customer_id = isset($get['customer_id']) ? $get['customer_id'] : '';
 
-        $accessRights = $this->accessRights->getAccessRightByCustomerId($customer_id);
+        $accessRights = $this->accessRights->getAccessRightsByCustomerIdForExport($customer_id);
 
         if (!empty($accessRights)) {
             $this->exportToExcel($accessRights);
@@ -284,6 +284,14 @@ class CustomersController extends BaseController
 
     private function exportToExcel($data = [])
     {
+        $displayHeading = [
+            'name' => 'Name',
+            'company_name' => 'Company Name',
+            'identity_number' => 'Identity Number',
+            'email' => 'E-mail Address',
+            'status' => 'Status'
+        ];
+
         $ext = 'xlsx';
         $companyName = $data[0]['company_name'];
         $filename = 'Access Rights - ' . $companyName . ' (Madam v.2.0).' . $ext;
@@ -296,7 +304,7 @@ class CustomersController extends BaseController
         if (isset($data)) {
             foreach ($data as $d) {
                 if (!$heading) {
-                    echo \implode("\t", \array_keys($d)) . "\n";
+                    echo \implode("\t", $displayHeading) . "\n";
                     $heading = true;
                 }
 
