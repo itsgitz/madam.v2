@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Author: anggit.ginanjar@outlook.com <itsgitz.com>
- */
-
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/vendor/fpdf/fpdf.php';
 
