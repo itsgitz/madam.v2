@@ -282,7 +282,7 @@ class Networking
     public function getVlanSubTableData($vlanName)
     {
         $data = [];
-        $query = "SELECT * FROM `$vlanName`";
+        $query = "SELECT * FROM `$vlanName` ORDER BY convert(`vlan_id`, decimal) ASC";
         $result = $this->db->getConnection()->query($query);
 
         if ($result->num_rows > 0) {
