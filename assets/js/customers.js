@@ -48,12 +48,12 @@ $(function () {
         viewSalesName.val(salesName);
         viewSegmentation.val(segmentation);
 
-        let accessRightsUrl = 'http://' + window.location.host + '/access_rights?customer_id=' + customerId + '&request_type=json&action=api';
+        let accessRightsUrl = 'https://' + window.location.host + '/access_rights?customer_id=' + customerId + '&request_type=json&action=api';
         console.warn(accessRightsUrl);
 
-        let accessRightsAddHref = 'http://' + window.location.host + '/access_rights?customer_id=' + customerId + '&action=add';
-        let accessRightsExportToExcelHref = 'http://' + window.location.host + '/customers?customer_id=' + customerId + '&action=export_to_excel';
-        let accessRightsExportToExcelPdf = 'http://' + window.location.host + '/customers?customer_id=' + customerId + '&action=export_to_pdf';
+        let accessRightsAddHref = 'https://' + window.location.host + '/access_rights?customer_id=' + customerId + '&action=add';
+        let accessRightsExportToExcelHref = 'https://' + window.location.host + '/customers?customer_id=' + customerId + '&action=export_to_excel';
+        let accessRightsExportToExcelPdf = 'https://' + window.location.host + '/customers?customer_id=' + customerId + '&action=export_to_pdf';
 
         console.warn('send request to:', accessRightsUrl);
         $.get(accessRightsUrl, function (data) {
@@ -75,8 +75,8 @@ $(function () {
                 }
 
                 for (let i = 0; i < dataLength; i++) {
-                    let accessRightsEditHref = 'http://' + window.location.host + '/access_rights?id=' + data[i].id + '&action=edit',
-                        accessRightsRemoveHref = 'http://' + window.location.host + '/access_rights?id=' + data[i].id + '&action=remove';
+                    let accessRightsEditHref = 'https://' + window.location.host + '/access_rights?id=' + data[i].id + '&action=edit',
+                        accessRightsRemoveHref = 'https://' + window.location.host + '/access_rights?id=' + data[i].id + '&action=remove';
 
                     let statusClassName = '';
 
