@@ -10,7 +10,7 @@ services:
             - MYSQL_PASSWORD=${DB_PASSWORD}
         restart: on-failure
         ports: 
-            - '3306:3306'
+            - '127.0.0.1:3306:3306'
         volumes: 
             - ./docker:/var/lib/mysql
         networks: 
@@ -23,7 +23,7 @@ services:
         volumes: 
             - ./:/var/www/html
         ports: 
-            - '8080:80'
+            - '127.0.0.1:8080:80'
         networks: 
             - madam.v2
         environment: 

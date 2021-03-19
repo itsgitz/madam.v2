@@ -1,14 +1,14 @@
 install:
 	mkdir -p docker
-	docker-compose up --build --force-recreate -d
+	docker-compose -p madam up --build --force-recreate -d
 	chmod 777 -R docker
-	docker-compose logs -f
+	docker-compose -p madam logs -f
 uninstall:
-	docker-compose down -v
+	docker-compose -p madam down -v
 	docker system prune -f
 	rm -Rfv docker
 	rm -Rfv cache
 start:
-	docker-compose start
+	docker-compose -p madam start
 stop:
-	docker-compose stop
+	docker-compose -p madam stop
