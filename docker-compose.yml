@@ -8,7 +8,7 @@ services:
             - MYSQL_DATABASE=${DB_NAME}
             - MYSQL_USER=${DB_USERNAME}
             - MYSQL_PASSWORD=${DB_PASSWORD}
-        restart: on-failure
+        restart: always
         ports: 
             - '127.0.0.1:3306:3306'
         volumes: 
@@ -19,7 +19,7 @@ services:
         depends_on:
             - madam.v2-db
         build: .
-        restart: unless-stopped
+        restart: always
         volumes: 
             - ./:/var/www/html
         ports: 
